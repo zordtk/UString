@@ -31,4 +31,8 @@ TEST_CASE("Comparison", "[UString]")
     REQUIRE( UString(u8"ήήήήήήήή") == u8"ήήήήήήήή" );
     REQUIRE( UString(u8"ήήήήήήήή").length() == 8 );
     REQUIRE( UString(u8"ήήήήήήήή").size() == 16 );
+    
+    UString tmp(u8"άέήίΰαa0djk");
+    REQUIRE( tmp.at(1) == 0x03AD );
+    REQUIRE( tmp.at(8) == 'd' );
 }

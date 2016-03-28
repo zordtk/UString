@@ -69,6 +69,10 @@
             UString toLower() noexcept;
             UString toTitleCase() noexcept;
             
+            // Character Indexing
+            UChar at(std::size_t i) const noexcept;
+            UChar operator[](std::size_t i) const noexcept;
+            
             class iterator : public std::iterator<std::bidirectional_iterator_tag, UChar>
             {
                 public:
