@@ -1,0 +1,21 @@
+# Binary Files
+*.o
+*.so
+*.a
+
+# CMake
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Makefile
+cmake_install.cmake
+install_manifest.txt
+
+# Build directory
+build   
+nbproject
+
+# Don't include the unicode data
+Source/UnicodeData.cpp
+Include/UString/UnicodeData.h
+UnicodeData.txt
