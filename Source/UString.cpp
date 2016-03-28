@@ -272,3 +272,49 @@ UString UString::subStr(std::size_t start, std::size_t len) const noexcept
     std::copy(startIter, endIter, std::back_inserter(retStr.mData));
     return retStr;
 }
+
+std::size_t UString::find(UChar ch, std::size_t start) const noexcept
+{
+    utf8::iterator<std::string::const_iterator> iter(mData.begin(), mData.begin(), mData.end());
+    utf8::iterator<std::string::const_iterator> endIter(mData.end(), mData.begin(), mData.end());
+    
+    if( start > 0 )
+        utf8::advance(iter, start, endIter);
+    
+    for( uint32_t idx=0; iter != endIter; iter++, idx++ )
+    {
+        if ( *iter == ch )
+            return idx;
+    }
+    return npos;
+}
+
+std::size_t UString::find(const UString& find, std::size_t start) const noexcept
+{
+    const std::size_t len = length();
+    if( len - start < find.length() )
+        return npos;
+
+    for( std::size_t i=start; i<len; i++ )
+    {
+        if( at(i) == find.at(0) )
+        {
+            uint32_t startPos = i;
+            bool found = true;
+            for( std::size_t j=1; j<find.length(); j++)
+            {
+                i++;
+                if( at(i) == find.at(i) )
+                {
+                    found = false;
+                    break;
+                }
+            }
+
+            if( found )
+                return startPos;
+        }
+    }
+
+    return npos;
+}

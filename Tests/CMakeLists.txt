@@ -26,6 +26,7 @@ set(USTRING_TEST_SRCS
     TestComparison.cpp
     TestAssignment.cpp
     TestSubstring.cpp
+    TestFind.cpp
     TestUChar.cpp
 )
 

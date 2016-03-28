@@ -75,6 +75,8 @@
             
             // Substring 
             UString subStr(std::size_t start, std::size_t len=npos) const noexcept;
+            std::size_t find(UChar ch, std::size_t start=0) const noexcept;
+            std::size_t find(const UString& str, std::size_t start=0) const noexcept;
             
             class iterator : public std::iterator<std::bidirectional_iterator_tag, UChar>
             {
