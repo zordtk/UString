@@ -1,6 +1,6 @@
 UString - C++11 UTF-8 String Library
 ====================================
-UString is a open-source C++11 UTF-8 String library, that is free for personal and commercial use. It uses std::string as it's data container and offers conversion to and from UTF-16/32.
+UString is a open-source C++11 UTF-8 String library, that is free for personal and commercial use. It uses std::string as it's data container and offers conversion to and from UTF-8/16/32.
 
 ## Features ##
  * Unicode character database
@@ -17,7 +17,7 @@ UString is still in VERY early stages, so the API is still subject to much chang
 
 ## TODO ##
  * Manipulation functions
-  * replace, sub-string, etc
+  * replace, ~~sub-string~~, etc
  * Formatting functions
  * More operator support
  * More everything!
@@ -30,5 +30,3 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-
