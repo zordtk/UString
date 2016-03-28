@@ -25,6 +25,7 @@ set(USTRING_TEST_SRCS
     TestConversion.cpp
     TestComparison.cpp
     TestAssignment.cpp
+    TestSubstring.cpp
     TestUChar.cpp
 )
 

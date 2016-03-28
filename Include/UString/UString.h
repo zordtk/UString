@@ -73,6 +73,9 @@
             UChar at(std::size_t i) const noexcept;
             UChar operator[](std::size_t i) const noexcept;
             
+            // Substring 
+            UString subStr(std::size_t start, std::size_t len=npos) const noexcept;
+            
             class iterator : public std::iterator<std::bidirectional_iterator_tag, UChar>
             {
                 public:

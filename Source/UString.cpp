@@ -250,3 +250,25 @@ UChar UString::operator[](std::size_t i) const noexcept
 {
     return at(i);
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////
+/// Sub-String                                                                        ///
+/////////////////////////////////////////////////////////////////////////////////////////
+UString UString::subStr(std::size_t start, std::size_t len) const noexcept
+{
+    UString retStr;
+    auto startIter = mData.begin();
+    auto endIter   = mData.begin();
+
+    utf8::advance(startIter, start, mData.end());
+    if( len != npos )
+    {
+        endIter = startIter;
+        utf8::advance(endIter, len, mData.end());
+    }
+    else
+        endIter = mData.end();
+    
+    std::copy(startIter, endIter, std::back_inserter(retStr.mData));
+    return retStr;
+}
