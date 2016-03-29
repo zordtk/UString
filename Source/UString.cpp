@@ -74,6 +74,16 @@ UString& UString::append(const UString& str) noexcept
     return *this;
 }
 
+void UString::push_back(UChar ch) noexcept
+{
+    append(ch);
+}
+
+void UString::push_back(const UString& str) noexcept
+{
+    append(str);
+}
+
 UString& UString::prepend(UChar ch) noexcept
 {
     mData = UString(ch).append(*this).mData;
@@ -90,6 +100,16 @@ UString& UString::prepend(const UString& str) noexcept
 {
     mData = UString(str).append(*this).mData;
     return *this;
+}
+
+void UString::push_front(UChar ch) noexcept
+{
+    prepend(ch);
+}
+
+void UString::push_front(const UString& str) noexcept
+{
+    prepend(str);
 }
 
 UString& UString::operator+=(const UString& str) noexcept
@@ -190,45 +210,24 @@ UString UString::fromStdU32String(const std::u32string& str) noexcept
     return retStr;
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////
-/// Iterator                                                                          ///
-/////////////////////////////////////////////////////////////////////////////////////////
-UString::iterator& UString::iterator::operator++() noexcept
+UString::Iterator UString::begin() noexcept
 {
-    utf8::next(mIter, mRangeEnd);
-    return *this;
+    return Iterator(mData.begin(), mData.end(), mData.begin());
 }
 
-UString::iterator& UString::iterator::operator--() noexcept
+UString::Iterator UString::end() noexcept
 {
-    utf8::prior(mIter, mRangeStart);
-    return *this;
+    return Iterator(mData.begin(), mData.end(), mData.end());
 }
 
-bool UString::iterator::operator!=(const iterator& other) noexcept
+UString::ConstIterator UString::begin() const noexcept
 {
-    return !operator==(other);
+    return ConstIterator(mData.begin(), mData.end(), mData.begin());
 }
 
-bool UString::iterator::operator==(const iterator& other) noexcept
+UString::ConstIterator UString::end() const noexcept
 {
-    return( mIter == other.mIter && mRangeStart == other.mRangeStart && mRangeEnd == other.mRangeEnd );
-}
-
-const UChar UString::iterator::operator*() const noexcept
-{
-    auto temp = mIter;
-    return UChar(utf8::next(temp, mRangeEnd));
-}
-
-UString::iterator UString::begin() noexcept
-{
-    return iterator(mData.begin(), mData.end(), mData.begin());
-}
-
-UString::iterator UString::end() noexcept
-{
-    return iterator(mData.begin(), mData.end(), mData.end());
+    return ConstIterator(mData.begin(), mData.end(), mData.end());
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////

@@ -24,12 +24,15 @@
 #define _USTRING_USTRING_H_
 
     #include "UChar.h"
+    #include "utf8/utf8.h"
     #include <string>
     #include <cstdint>
 
     class UString
     {
         public:
+            typedef UChar value_type;
+            
             UString() noexcept { }
             UString(const UString& str) noexcept;
             explicit UString(UChar ch) noexcept;
@@ -47,11 +50,21 @@
             UString& append(UChar ch) noexcept;
             UString& append(const UString& str) noexcept;
             UString& append(const char* str) noexcept;
+            UString& operator+=(const char *str) noexcept;
+            UString& operator+=(const UString& str) noexcept;
+            
+            // push_back() is for STL compat and just calls append
+            void push_back(UChar ch) noexcept;
+            void push_back(const UString& str) noexcept;
+            
             UString& prepend(UChar ch) noexcept;
             UString& prepend(const UString& str) noexcept;
             UString& prepend(const char* str) noexcept;
-            UString& operator+=(const char *str) noexcept;
-            UString& operator+=(const UString& str) noexcept;
+            
+            // push_front() is for STL compat and just calls prepend
+            void push_front(UChar ch) noexcept;
+            void push_front(const UString& str) noexcept;
+
             
             // Comparison
             bool operator==(const UString& str) const noexcept;
@@ -81,34 +94,47 @@
             std::size_t find(UChar ch, std::size_t start=0) const noexcept;
             std::size_t find(const UString& str, std::size_t start=0) const noexcept;
             
-            class iterator : public std::iterator<std::bidirectional_iterator_tag, UChar>
+            template<typename IterType>
+            class IteratorBase : public std::iterator<std::bidirectional_iterator_tag, UChar>
             {
                 public:
-                    iterator& operator++() noexcept;
-                    iterator& operator++(int) noexcept;
-                    iterator& operator--() noexcept;
-                    iterator& operator--(int) noexcept;
+                    typedef UChar value_type;
                     
-                    const UChar operator*() const noexcept;
-                    
-                    bool operator==(const iterator& other) noexcept;
-                    bool operator!=(const iterator& other) noexcept;
-                protected:
-                    friend class UString;
-                    
-                    iterator(std::string::iterator begin, std::string::iterator end, std::string::iterator pos)
+                    IteratorBase() = default;
+                    IteratorBase(const IterType& begin, const IterType& end, const IterType& pos)
                         : mRangeStart(begin), mRangeEnd(end), mIter(pos)
                     {
 
                     }
-                          
-                    std::string::iterator mRangeStart;
-                    std::string::iterator mRangeEnd;
-                    std::string::iterator mIter;
+                    
+                    iterator& operator++() { utf8::next(mIter, mRangeEnd); return *this; }
+                    iterator  operator++(int) { iterator temp = *this; utf8::next(mIter, mRangeStart); return temp; }
+                    iterator& operator--() { utf8::prior(mIter, mRangeStart); return *this; }
+                    iterator  operator--(int) { iterator temp = *this; utf8::prior(mIter, mRangeEnd); return temp; }
+                    
+                    IterType base() const { return mIter; }
+                    
+                    const UChar operator*() const { auto temp = mIter; return UChar(utf8::next(temp, mRangeEnd)); }
+               
+                    bool operator!=(const IteratorBase& other) noexcept { return !operator==(other); }
+                    bool operator==(const IteratorBase& other) noexcept 
+                    {
+                        return( mIter == other.mIter && mRangeStart == other.mRangeStart && mRangeEnd == other.mRangeEnd );
+                    }
+
+                protected:
+                    IterType mRangeStart;
+                    IterType mRangeEnd;
+                    IterType mIter;
             };
             
-            iterator begin() noexcept;
-            iterator end() noexcept;
+            typedef IteratorBase<std::string::iterator>        Iterator;
+            typedef IteratorBase<std::string::const_iterator>  ConstIterator;
+            
+            Iterator begin() noexcept;
+            Iterator end() noexcept;
+            ConstIterator begin() const noexcept;
+            ConstIterator end() const noexcept;
             
             // Size
             std::size_t length() const;

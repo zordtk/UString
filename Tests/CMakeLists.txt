@@ -28,6 +28,7 @@ set(USTRING_TEST_SRCS
     TestSubstring.cpp
     TestFind.cpp
     TestUChar.cpp
+    TestIterator.cpp
 )
 
 if( BUILD_TESTS )
