@@ -30,7 +30,7 @@
     class UString
     {
         public:
-            UString() noexcept = default;
+            UString() noexcept { }
             UString(const UString& str) noexcept;
             explicit UString(UChar ch) noexcept;
             explicit UString(const char *str) noexcept;
