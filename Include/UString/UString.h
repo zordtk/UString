@@ -43,10 +43,13 @@
             UString& operator=(const UString& str) noexcept;
             UString& operator=(const char* str) noexcept;
 
-            // Append
+            // Append/Prepend
             UString& append(UChar ch) noexcept;
             UString& append(const UString& str) noexcept;
             UString& append(const char* str) noexcept;
+            UString& prepend(UChar ch) noexcept;
+            UString& prepend(const UString& str) noexcept;
+            UString& prepend(const char* str) noexcept;
             UString& operator+=(const char *str) noexcept;
             UString& operator+=(const UString& str) noexcept;
             

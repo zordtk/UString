@@ -54,7 +54,7 @@ UString& UString::assign(const char* str) noexcept
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
-/// Append                                                                            ///
+/// Append/Prepend                                                                    ///
 /////////////////////////////////////////////////////////////////////////////////////////
 UString& UString::append(UChar ch) noexcept
 {
@@ -64,13 +64,31 @@ UString& UString::append(UChar ch) noexcept
 
 UString& UString::append(const char* str) noexcept
 {
-    mData.assign(str);
+    mData.append(str);
     return *this;
 }
 
 UString& UString::append(const UString& str) noexcept
 {
     mData.append(str.mData);
+    return *this;
+}
+
+UString& UString::prepend(UChar ch) noexcept
+{
+    mData = UString(ch).append(*this).mData;
+    return *this;
+}
+
+UString& UString::prepend(const char *str) noexcept
+{
+    mData = UString(str).append(*this).mData;
+    return *this;
+}
+
+UString& UString::prepend(const UString& str) noexcept
+{
+    mData = UString(str).append(*this).mData;
     return *this;
 }
 

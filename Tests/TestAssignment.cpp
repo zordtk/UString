@@ -26,4 +26,9 @@
 TEST_CASE("Assignment", "[UString]") 
 {
     REQUIRE( UString().assign(u8"ά έ ή ί ΰ α") == u8"ά έ ή ί ΰ α" );
+    REQUIRE( UString().append("testέέ").append("foo") == u8"testέέfoo" );
+    REQUIRE( UString("test").append(0x2C09) == u8"test\u2c09" );
+    REQUIRE( UString("test").append("blah") == "testblah" );
+    REQUIRE( UString("est").prepend('t') == "test" );
+    REQUIRE( UString("foo").prepend(u8"έέ").append("bar") == u8"έέfoobar" );
 }
