@@ -73,8 +73,8 @@
             UString toTitleCase() noexcept;
             
             // Character Indexing
-            UChar at(std::size_t i) const noexcept;
-            UChar operator[](std::size_t i) const noexcept;
+            const UChar at(std::size_t i) const noexcept;
+            const UChar operator[](std::size_t i) const noexcept;
             
             // Substring 
             UString subStr(std::size_t start, std::size_t len=npos) const noexcept;

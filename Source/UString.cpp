@@ -252,7 +252,7 @@ std::size_t UString::maxSize() const
 /////////////////////////////////////////////////////////////////////////////////////////
 /// Character Indexing                                                                ///
 /////////////////////////////////////////////////////////////////////////////////////////
-UChar UString::at(std::size_t i) const noexcept
+const UChar UString::at(std::size_t i) const noexcept
 {
     utf8::iterator<std::string::const_iterator> iter(mData.begin(), mData.begin(), mData.end());
     for(std::size_t j = 0; j < utf8::distance(mData.begin(), mData.end()); j++, ++iter)
@@ -264,7 +264,7 @@ UChar UString::at(std::size_t i) const noexcept
     return UCHAR_CODE_NULL;
 }
 
-UChar UString::operator[](std::size_t i) const noexcept
+const UChar UString::operator[](std::size_t i) const noexcept
 {
     return at(i);
 }
