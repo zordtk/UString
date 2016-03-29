@@ -104,9 +104,9 @@
             UChar& operator=(UChar codePoint) noexcept;
             
             // Comparison
-            inline bool operator==(UChar codePoint) noexcept { return( mChar == codePoint ); }
-            inline bool operator==(int codePoint) noexcept { return( mChar == codePoint ); }
-            inline bool operator!=(UChar codePoint) noexcept { return( mChar != codePoint ); }
+            inline const bool operator==(UChar codePoint) const noexcept { return( mChar == codePoint ); }
+            inline const bool operator==(int codePoint) const noexcept { return( mChar == codePoint ); }
+            inline const bool operator!=(UChar codePoint) const noexcept { return( mChar != codePoint ); }
 
             // Case Conversion
             static UChar toUpper(ValueType codePoint) noexcept;
