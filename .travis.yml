@@ -4,6 +4,8 @@ compiler:
 - clang
 os:
 - linux
+sudo: required
+dist: trusty
 before_script:
     - mkdir build
     - cd build
