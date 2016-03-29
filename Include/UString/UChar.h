@@ -112,9 +112,9 @@
             static UChar toUpper(ValueType codePoint) noexcept;
             static UChar toLower(ValueType codePoint) noexcept;
             static UChar toTitleCase(ValueType codePoint) noexcept;
-            inline UChar toUpper() noexcept { return toUpper(mChar); } 
-            inline UChar toLower() noexcept { return toLower(mChar); }
-            inline UChar toTitleCase() noexcept { return toTitleCase(mChar); }
+            inline UChar toUpper() const noexcept { return toUpper(mChar); } 
+            inline UChar toLower() const noexcept { return toLower(mChar); }
+            inline UChar toTitleCase() const noexcept { return toTitleCase(mChar); }
             
             // Is?? functions
             static bool isNull(ValueType codePoint) noexcept;
