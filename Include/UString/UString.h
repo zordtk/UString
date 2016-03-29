@@ -81,9 +81,9 @@
             static UString fromStdU32String(const std::u32string& str) noexcept;
             
             // Case Conversion
-            UString toUpper() noexcept;
-            UString toLower() noexcept;
-            UString toTitleCase() noexcept;
+            UString toUpper() const noexcept;
+            UString toLower() const noexcept;
+            UString toTitleCase() const noexcept;
             
             // Character Indexing
             const UChar at(std::size_t i) const noexcept;

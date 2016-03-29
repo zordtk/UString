@@ -150,7 +150,7 @@ bool UString::operator!=(const char* str) const noexcept
 /////////////////////////////////////////////////////////////////////////////////////////
 /// Case Conversion                                                                   ///
 /////////////////////////////////////////////////////////////////////////////////////////
-UString UString::toLower() noexcept
+UString UString::toLower() const noexcept
 {
     UString tmp;
     for( UChar ch : *this )
@@ -158,7 +158,7 @@ UString UString::toLower() noexcept
     return tmp;
 }
 
-UString UString::toUpper() noexcept
+UString UString::toUpper() const noexcept
 {
     UString tmp;
     for( UChar ch : *this )
@@ -166,7 +166,7 @@ UString UString::toUpper() noexcept
     return tmp;
 }
 
-UString UString::toTitleCase() noexcept
+UString UString::toTitleCase() const noexcept
 {
     UString tmp;
     for( UChar ch : *this )
