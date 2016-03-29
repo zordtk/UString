@@ -11,6 +11,16 @@ UString is a open-source C++11 UTF-8 String library, that is free for personal a
  * STL style iterator
  * Character-based access
  * Unit tests
+ * Documentation
+ 
+## Building ##
+Building is very easy using the CMake build system. It will automatically download and generate the required Unicode data using a simple python script. In the future I may include the generated source in the git repository, but for now you must generate it using the script.
+```
+mkdir build; cd build
+cmake ..
+make
+```
+You can use ccmake to see the variables you can set. Such as building dynamic or static library, building the unit tests, and automatically running the unit tests on build.
 
 ## Development ##
 UString is still in VERY early stages, so the API is still subject to much change. I welcome any contributions such as code, bug fixes, etc.
