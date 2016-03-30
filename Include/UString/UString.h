@@ -35,8 +35,8 @@
             
             UString() noexcept { }
             UString(const UString& str) noexcept;
+            UString(const char *str) noexcept;
             explicit UString(UChar ch) noexcept;
-            explicit UString(const char *str) noexcept;
             
             static const size_t npos = -1;
             
