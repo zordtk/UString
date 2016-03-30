@@ -107,10 +107,10 @@
 
                     }
                     
-                    iterator& operator++() { utf8::next(mIter, mRangeEnd); return *this; }
-                    iterator  operator++(int) { iterator temp = *this; utf8::next(mIter, mRangeStart); return temp; }
-                    iterator& operator--() { utf8::prior(mIter, mRangeStart); return *this; }
-                    iterator  operator--(int) { iterator temp = *this; utf8::prior(mIter, mRangeEnd); return temp; }
+                    IteratorBase& operator++() { utf8::next(mIter, mRangeEnd); return *this; }
+                    IteratorBase  operator++(int) { IteratorBase temp = *this; utf8::next(mIter, mRangeStart); return temp; }
+                    IteratorBase& operator--() { utf8::prior(mIter, mRangeStart); return *this; }
+                    IteratorBase  operator--(int) { IteratorBase temp = *this; utf8::prior(mIter, mRangeEnd); return temp; }
                     
                     IterType base() const { return mIter; }
                     
@@ -130,7 +130,7 @@
             
             typedef IteratorBase<std::string::iterator>        Iterator;
             typedef IteratorBase<std::string::const_iterator>  ConstIterator;
-            
+
             Iterator begin();
             Iterator end();
             ConstIterator begin() const;
