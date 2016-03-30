@@ -41,13 +41,13 @@ UString::UString(const UString& str) noexcept
 /////////////////////////////////////////////////////////////////////////////////////////
 /// Assignment                                                                        ///
 /////////////////////////////////////////////////////////////////////////////////////////
-UString& UString::assign(const UString& str) noexcept
+UString& UString::assign(const UString& str)
 {
     mData.assign(str.mData);
     return *this;
 }
 
-UString& UString::assign(const char* str) noexcept
+UString& UString::assign(const char* str)
 {
     mData.assign(str);
     return *this;
@@ -56,69 +56,69 @@ UString& UString::assign(const char* str) noexcept
 /////////////////////////////////////////////////////////////////////////////////////////
 /// Append/Prepend                                                                    ///
 /////////////////////////////////////////////////////////////////////////////////////////
-UString& UString::append(UChar ch) noexcept
+UString& UString::append(UChar ch)
 {
     utf8::append(ch, std::back_inserter(mData));
     return *this;
 }
 
-UString& UString::append(const char* str) noexcept
+UString& UString::append(const char* str)
 {
     mData.append(str);
     return *this;
 }
 
-UString& UString::append(const UString& str) noexcept
+UString& UString::append(const UString& str)
 {
     mData.append(str.mData);
     return *this;
 }
 
-void UString::push_back(UChar ch) noexcept
+void UString::push_back(UChar ch)
 {
     append(ch);
 }
 
-void UString::push_back(const UString& str) noexcept
+void UString::push_back(const UString& str)
 {
     append(str);
 }
 
-UString& UString::prepend(UChar ch) noexcept
+UString& UString::prepend(UChar ch)
 {
     mData = UString(ch).append(*this).mData;
     return *this;
 }
 
-UString& UString::prepend(const char *str) noexcept
+UString& UString::prepend(const char *str)
 {
     mData = UString(str).append(*this).mData;
     return *this;
 }
 
-UString& UString::prepend(const UString& str) noexcept
+UString& UString::prepend(const UString& str)
 {
     mData = UString(str).append(*this).mData;
     return *this;
 }
 
-void UString::push_front(UChar ch) noexcept
+void UString::push_front(UChar ch)
 {
     prepend(ch);
 }
 
-void UString::push_front(const UString& str) noexcept
+void UString::push_front(const UString& str)
 {
     prepend(str);
 }
 
-UString& UString::operator+=(const UString& str) noexcept
+UString& UString::operator+=(const UString& str)
 {
     append(str);
     return *this;
 }
 
-UString& UString::operator+=(const char* str) noexcept
+UString& UString::operator+=(const char* str)
 {
     append(str);
     return *this;
@@ -127,22 +127,22 @@ UString& UString::operator+=(const char* str) noexcept
 /////////////////////////////////////////////////////////////////////////////////////////
 /// Comparison                                                                        ///
 /////////////////////////////////////////////////////////////////////////////////////////
-bool UString::operator==(const UString& str) const noexcept
+bool UString::operator==(const UString& str) const
 {
     return( mData == str.mData );
 }
 
-bool UString::operator==(const char* str) const noexcept
+bool UString::operator==(const char* str) const
 {
     return( mData == str );
 }
 
-bool UString::operator!=(const UString& str) const noexcept
+bool UString::operator!=(const UString& str) const
 {
     return( mData != str.mData );
 }
 
-bool UString::operator!=(const char* str) const noexcept
+bool UString::operator!=(const char* str) const
 {
     return( mData != str );
 }
@@ -150,7 +150,7 @@ bool UString::operator!=(const char* str) const noexcept
 /////////////////////////////////////////////////////////////////////////////////////////
 /// Case Conversion                                                                   ///
 /////////////////////////////////////////////////////////////////////////////////////////
-UString UString::toLower() const noexcept
+UString UString::toLower() const
 {
     UString tmp;
     for( UChar ch : *this )
@@ -158,7 +158,7 @@ UString UString::toLower() const noexcept
     return tmp;
 }
 
-UString UString::toUpper() const noexcept
+UString UString::toUpper() const
 {
     UString tmp;
     for( UChar ch : *this )
@@ -166,7 +166,7 @@ UString UString::toUpper() const noexcept
     return tmp;
 }
 
-UString UString::toTitleCase() const noexcept
+UString UString::toTitleCase() const
 {
     UString tmp;
     for( UChar ch : *this )
@@ -177,55 +177,55 @@ UString UString::toTitleCase() const noexcept
 /////////////////////////////////////////////////////////////////////////////////////////
 /// Type-Casting                                                                      ///
 /////////////////////////////////////////////////////////////////////////////////////////
-std::string UString::toStdString() const noexcept
+std::string UString::toStdString() const
 {
     return mData;
 }
 
-std::u16string UString::toStdU16String() const noexcept
+std::u16string UString::toStdU16String() const
 {
     std::u16string u16str;
     utf8::utf8to16(mData.begin(), mData.end(), std::back_inserter(u16str));
     return u16str;
 }
 
-std::u32string UString::toStdU32String() const noexcept
+std::u32string UString::toStdU32String() const
 {
     std::u32string u32str;
     utf8::utf8to32(mData.begin(), mData.end(), std::back_inserter(u32str));
     return u32str;
 }
 
-UString UString::fromStdU16String(const std::u16string& str) noexcept
+UString UString::fromStdU16String(const std::u16string& str)
 {
     UString retStr;
     utf8::utf16to8(str.begin(), str.end(), std::back_inserter(retStr.mData));
     return retStr;
 }
 
-UString UString::fromStdU32String(const std::u32string& str) noexcept
+UString UString::fromStdU32String(const std::u32string& str)
 {
     UString retStr;
     utf8::utf32to8(str.begin(), str.end(), std::back_inserter(retStr.mData));
     return retStr;
 }
 
-UString::Iterator UString::begin() noexcept
+UString::Iterator UString::begin()
 {
     return Iterator(mData.begin(), mData.end(), mData.begin());
 }
 
-UString::Iterator UString::end() noexcept
+UString::Iterator UString::end()
 {
     return Iterator(mData.begin(), mData.end(), mData.end());
 }
 
-UString::ConstIterator UString::begin() const noexcept
+UString::ConstIterator UString::begin() const
 {
     return ConstIterator(mData.begin(), mData.end(), mData.begin());
 }
 
-UString::ConstIterator UString::end() const noexcept
+UString::ConstIterator UString::end() const
 {
     return ConstIterator(mData.begin(), mData.end(), mData.end());
 }
@@ -251,7 +251,7 @@ std::size_t UString::maxSize() const
 /////////////////////////////////////////////////////////////////////////////////////////
 /// Character Indexing                                                                ///
 /////////////////////////////////////////////////////////////////////////////////////////
-const UChar UString::at(std::size_t i) const noexcept
+const UChar UString::at(std::size_t i) const
 {
     utf8::iterator<std::string::const_iterator> iter(mData.begin(), mData.begin(), mData.end());
     for(std::size_t j = 0; j < utf8::distance(mData.begin(), mData.end()); j++, ++iter)
@@ -263,7 +263,7 @@ const UChar UString::at(std::size_t i) const noexcept
     return UCHAR_CODE_NULL;
 }
 
-const UChar UString::operator[](std::size_t i) const noexcept
+const UChar UString::operator[](std::size_t i) const
 {
     return at(i);
 }
@@ -271,7 +271,7 @@ const UChar UString::operator[](std::size_t i) const noexcept
 /////////////////////////////////////////////////////////////////////////////////////////
 /// Sub-String                                                                        ///
 /////////////////////////////////////////////////////////////////////////////////////////
-UString UString::subStr(std::size_t start, std::size_t len) const noexcept
+UString UString::subStr(std::size_t start, std::size_t len) const
 {
     UString retStr;
     auto startIter = mData.begin();
@@ -290,7 +290,7 @@ UString UString::subStr(std::size_t start, std::size_t len) const noexcept
     return retStr;
 }
 
-std::size_t UString::find(UChar ch, std::size_t start) const noexcept
+std::size_t UString::find(UChar ch, std::size_t start) const
 {
     utf8::iterator<std::string::const_iterator> iter(mData.begin(), mData.begin(), mData.end());
     utf8::iterator<std::string::const_iterator> endIter(mData.end(), mData.begin(), mData.end());
@@ -306,7 +306,7 @@ std::size_t UString::find(UChar ch, std::size_t start) const noexcept
     return npos;
 }
 
-std::size_t UString::find(const UString& find, std::size_t start) const noexcept
+std::size_t UString::find(const UString& find, std::size_t start) const
 {
     const std::size_t len = length();
     if( len - start < find.length() )

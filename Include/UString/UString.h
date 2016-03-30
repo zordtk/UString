@@ -33,7 +33,7 @@
         public:
             typedef UChar value_type;
             
-            UString() noexcept { }
+            UString() { }
             UString(const UString& str) noexcept;
             UString(const char *str) noexcept;
             explicit UString(UChar ch) noexcept;
@@ -41,58 +41,58 @@
             static const size_t npos = -1;
             
             // Assignment
-            UString& assign(const UString& str) noexcept;
-            UString& assign(const char* str) noexcept;
-            UString& operator=(const UString& str) noexcept;
-            UString& operator=(const char* str) noexcept;
+            UString& assign(const UString& str);
+            UString& assign(const char* str);
+            UString& operator=(const UString& str);
+            UString& operator=(const char* str);
 
             // Append/Prepend
-            UString& append(UChar ch) noexcept;
-            UString& append(const UString& str) noexcept;
-            UString& append(const char* str) noexcept;
-            UString& operator+=(const char *str) noexcept;
-            UString& operator+=(const UString& str) noexcept;
+            UString& append(UChar ch);
+            UString& append(const UString& str);
+            UString& append(const char* str);
+            UString& operator+=(const char *str);
+            UString& operator+=(const UString& str);
             
             // push_back() is for STL compat and just calls append
-            void push_back(UChar ch) noexcept;
-            void push_back(const UString& str) noexcept;
+            void push_back(UChar ch);
+            void push_back(const UString& str);
             
-            UString& prepend(UChar ch) noexcept;
-            UString& prepend(const UString& str) noexcept;
-            UString& prepend(const char* str) noexcept;
+            UString& prepend(UChar ch);
+            UString& prepend(const UString& str);
+            UString& prepend(const char* str);
             
             // push_front() is for STL compat and just calls prepend
-            void push_front(UChar ch) noexcept;
-            void push_front(const UString& str) noexcept;
+            void push_front(UChar ch);
+            void push_front(const UString& str);
 
             
             // Comparison
-            bool operator==(const UString& str) const noexcept;
-            bool operator==(const char* str) const noexcept;
-            bool operator!=(const UString& str) const noexcept;
-            bool operator!=(const char* str) const noexcept;
+            bool operator==(const UString& str) const;
+            bool operator==(const char* str) const;
+            bool operator!=(const UString& str) const;
+            bool operator!=(const char* str) const;
             
             // Type conversion 
-            std::string toStdString() const noexcept;
-            std::u16string toStdU16String() const noexcept;
-            std::u32string toStdU32String() const noexcept;
+            std::string toStdString() const;
+            std::u16string toStdU16String() const;
+            std::u32string toStdU32String() const;
             
-            static UString fromStdU16String(const std::u16string& str) noexcept;
-            static UString fromStdU32String(const std::u32string& str) noexcept;
+            static UString fromStdU16String(const std::u16string& str);
+            static UString fromStdU32String(const std::u32string& str);
             
             // Case Conversion
-            UString toUpper() const noexcept;
-            UString toLower() const noexcept;
-            UString toTitleCase() const noexcept;
+            UString toUpper() const;
+            UString toLower() const;
+            UString toTitleCase() const;
             
             // Character Indexing
-            const UChar at(std::size_t i) const noexcept;
-            const UChar operator[](std::size_t i) const noexcept;
+            const UChar at(std::size_t i) const;
+            const UChar operator[](std::size_t i) const;
             
             // Substring 
-            UString subStr(std::size_t start, std::size_t len=npos) const noexcept;
-            std::size_t find(UChar ch, std::size_t start=0) const noexcept;
-            std::size_t find(const UString& str, std::size_t start=0) const noexcept;
+            UString subStr(std::size_t start, std::size_t len=npos) const;
+            std::size_t find(UChar ch, std::size_t start=0) const;
+            std::size_t find(const UString& str, std::size_t start=0) const;
             
             template<typename IterType>
             class IteratorBase : public std::iterator<std::bidirectional_iterator_tag, UChar>
@@ -116,8 +116,8 @@
                     
                     const UChar operator*() const { auto temp = mIter; return UChar(utf8::next(temp, mRangeEnd)); }
                
-                    bool operator!=(const IteratorBase& other) noexcept { return !operator==(other); }
-                    bool operator==(const IteratorBase& other) noexcept 
+                    bool operator!=(const IteratorBase& other) { return !operator==(other); }
+                    bool operator==(const IteratorBase& other) 
                     {
                         return( mIter == other.mIter && mRangeStart == other.mRangeStart && mRangeEnd == other.mRangeEnd );
                     }
@@ -131,10 +131,10 @@
             typedef IteratorBase<std::string::iterator>        Iterator;
             typedef IteratorBase<std::string::const_iterator>  ConstIterator;
             
-            Iterator begin() noexcept;
-            Iterator end() noexcept;
-            ConstIterator begin() const noexcept;
-            ConstIterator end() const noexcept;
+            Iterator begin();
+            Iterator end();
+            ConstIterator begin() const;
+            ConstIterator end() const;
             
             // Size
             std::size_t length() const;
