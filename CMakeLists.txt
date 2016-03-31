@@ -52,6 +52,10 @@ if( NOT EXISTS "${PROJECT_SOURCE_DIR}/Include/UString/UnicodeData.h"
     file(DOWNLOAD ${UNICODE_DATA_URL} "${PROJECT_SOURCE_DIR}/UnicodeData.txt")
 endif()
 
+if( ${CMAKE_SYSTEM_NAME} STREQUAL "Darwin" )
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+endif()
+
 foreach( i ${CMAKE_CXX_COMPILE_FEATURES} )
     if( ${i} STREQUAL "cxx_noexcept" )
         add_definitions("-DHAVE_NOEXCEPT")
