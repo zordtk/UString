@@ -9,7 +9,7 @@ sudo: required
 dist: trusty
 before_install:
     - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update          ; fi
-    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install gcc     ; fi
+    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; export CC=gcc-4.9 export CXX=gcc-4.9 ; fi
 before_script:
     - mkdir build
     - cd build
