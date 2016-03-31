@@ -34,9 +34,9 @@
             typedef UChar value_type;
             
             UString() { }
-            UString(const UString& str) noexcept;
-            UString(const char *str) noexcept;
-            explicit UString(UChar ch) noexcept;
+            UString(const UString& str) USTRING_NOEXCEPT;
+            UString(const char *str) USTRING_NOEXCEPT;
+            explicit UString(UChar ch) USTRING_NOEXCEPT;
             
             static const size_t npos = -1;
             

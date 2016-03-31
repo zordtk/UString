@@ -21,7 +21,7 @@
 # SOFTWARE.
 
 project(UString)
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 3.1)
 
 include_directories("${PROJECT_SOURCE_DIR}/Include/UString")
 
@@ -51,6 +51,12 @@ if( NOT EXISTS "${PROJECT_SOURCE_DIR}/Include/UString/UnicodeData.h"
     message("Must generate unicode data from sources, fetching UnicodeData.txt (~1.5MB)...")
     file(DOWNLOAD ${UNICODE_DATA_URL} "${PROJECT_SOURCE_DIR}/UnicodeData.txt")
 endif()
+
+foreach( i ${CMAKE_CXX_COMPILE_FEATURES} )
+    if( ${i} STREQUAL "cxx_noexcept" )
+        add_definitions("-DHAVE_NOEXCEPT")
+    endif()
+endforeach()
 
 add_subdirectory(Source)
 add_subdirectory(Tests)
