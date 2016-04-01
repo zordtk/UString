@@ -31,7 +31,7 @@ UString is still in VERY early stages, so the API is still subject to much chang
 - [ ] Replace methods
 - [ ] Erase methods (erase (by iter, index, etc), clear, ...)
 - [ ] Compare methods & operators (<, >, ...)
-- [ ] More find methods (findLastOf, findFirstOf, etc)
+- [ ] More find methods (~~findLastOf~~, findFirstOf, etc)
 - [ ] UTF-8 validation 
 - [ ] Compose and formatting functions
 
