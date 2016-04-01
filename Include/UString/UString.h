@@ -170,22 +170,22 @@
             using ConstIterator         = IteratorBase<std::string::const_iterator>;
             using ReverseIterator       = ReverseIteratorBase<Iterator>;
             using ConstReverseIterator  = ReverseIteratorBase<ConstIterator>;
+           
+            inline Iterator begin()                     { return Iterator(mData.begin(), mData.end(), mData.begin()); }
+            inline Iterator end()                       { return Iterator(mData.begin(), mData.end(), mData.end()); }
+            inline ConstIterator begin() const          { return ConstIterator(mData.begin(), mData.end(), mData.begin()); }
+            inline ConstIterator end() const            { return ConstIterator(mData.begin(), mData.end(), mData.end()); }
+            inline ReverseIterator rbegin()             { return ReverseIterator(end()); }
+            inline ReverseIterator rend()               { return ReverseIterator(begin()); }
+            inline ConstReverseIterator rbegin() const  { return ConstReverseIterator(end()); }
+            inline ConstReverseIterator rend() const    { return ConstReverseIterator(begin()); }
             
             // For STL
             using iterator                  = Iterator;
             using const_iterator            = ConstIterator;
             using reverse_iterator          = ReverseIterator;
             using const_reverse_iterator    = ConstReverseIterator;
-            
-            Iterator begin();
-            Iterator end();
-            inline ReverseIterator rbegin() { return ReverseIterator(end()); }
-            inline ReverseIterator rend()   { return ReverseIterator(begin()); }
-            
-            //ReverseIteratorBase rend()   { return ReverseIteratorBase<Iterator>(end()); }
-            ConstIterator begin() const;
-            ConstIterator end() const;
-            
+
             // Size
             std::size_t length() const;
             std::size_t size() const;  

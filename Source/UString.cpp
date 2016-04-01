@@ -210,26 +210,6 @@ UString UString::fromStdU32String(const std::u32string& str)
     return retStr;
 }
 
-UString::Iterator UString::begin()
-{
-    return Iterator(mData.begin(), mData.end(), mData.begin());
-}
-
-UString::Iterator UString::end()
-{
-    return Iterator(mData.begin(), mData.end(), mData.end());
-}
-
-UString::ConstIterator UString::begin() const
-{
-    return ConstIterator(mData.begin(), mData.end(), mData.begin());
-}
-
-UString::ConstIterator UString::end() const
-{
-    return ConstIterator(mData.begin(), mData.end(), mData.end());
-}
-
 /////////////////////////////////////////////////////////////////////////////////////////
 /// Size                                                                              ///
 /////////////////////////////////////////////////////////////////////////////////////////
