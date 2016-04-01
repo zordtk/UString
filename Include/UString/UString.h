@@ -160,7 +160,7 @@
                     ReverseIteratorBase& operator--()                   { BaseIterator::operator--(); return *this; }
                     ReverseIteratorBase  operator--(int)                { return BaseIterator::operator--(1); }
                     IterType             base() const                   { return BaseIterator::base(); }
-                    const UChar          operator*() const              { BaseIterator::operator*(); }
+                    const UChar          operator*() const              { return BaseIterator::operator*(); }
                     bool operator!=(const ReverseIteratorBase& other)   { return( other.base() != this->base() ); }
                     bool operator==(const ReverseIteratorBase& other)   { return( other.base() == this->base() ); }
             };
