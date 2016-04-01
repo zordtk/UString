@@ -28,4 +28,7 @@ TEST_CASE("Find Tests", "[UString]")
     REQUIRE( UString("abcέdeήίΰαa0").find(0x03AD) == 3 );
     REQUIRE( UString("asdaέ2dd").find(UString(u8"έ2dd")) == 4 );
     REQUIRE( UString("blahaέblah").find(UString("blah"), 3) == 6 );
+    REQUIRE( UString("abcfooabcde").findLastOf("ab") == 7 );
+    REQUIRE( UString(u8"abήίΰcfooabcήίΰde").findLastOf(u8"ήίΰ") == 14 );
+    REQUIRE( UString(u8"abήίΰcfooabcήίΰde").findLastOf(u8"ήίΰ", 6) == 4 );
 }

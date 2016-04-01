@@ -20,10 +20,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
                                                         
-#include <algorithm>
-
 #include "UString.h"
 #include "utf8/utf8.h"
+#include <algorithm>
+#include <iterator>
 
 UString::UString(UChar ch) USTRING_NOEXCEPT
 {
@@ -295,5 +295,18 @@ std::size_t UString::find(const UString& find, std::size_t start) const
     if( iter != end() )
         return std::distance(begin(), iter);
         
+    return npos;
+}
+
+std::size_t UString::findLastOf(const UString& find, std::size_t pos) const
+{
+    auto startIter = rbegin();
+    if( pos != npos )
+        std::advance(startIter, pos);
+    
+    auto iter = std::search(startIter, rend(), find.rbegin(), find.rend());
+    if( iter != rend() )
+        return length() - std::distance(rbegin(), iter) - 1;
+    
     return npos;
 }
