@@ -298,6 +298,19 @@ std::size_t UString::find(const UString& find, std::size_t start) const
     return npos;
 }
 
+std::size_t UString::findLastOf(UChar ch, std::size_t pos) const
+{
+    auto startIter = rbegin();
+    if( pos != npos )
+        std::advance(startIter, pos);
+    
+    auto iter = std::find(startIter, rend(), ch);
+    if( iter != rend() )
+        return length() - std::distance(rbegin(), iter) - 1;
+
+    return npos;
+}
+
 std::size_t UString::findLastOf(const UString& find, std::size_t pos) const
 {
     auto startIter = rbegin();

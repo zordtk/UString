@@ -93,6 +93,7 @@
             UString subStr(std::size_t start, std::size_t len=npos) const;
             std::size_t find(UChar ch, std::size_t start=npos) const;
             std::size_t find(const UString& str, std::size_t start=npos) const;
+            std::size_t findLastOf(UChar ch, std::size_t pos=npos) const;
             std::size_t findLastOf(const UString& find, std::size_t pos=npos) const;
             
             template<typename IterType>
