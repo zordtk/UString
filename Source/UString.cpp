@@ -23,17 +23,17 @@
 #include "UString.h"
 #include "utf8/utf8.h"
 
-UString::UString(UChar ch) noexcept
+UString::UString(UChar ch) USTRING_NOEXCEPT
 {
     append(ch);
 }
 
-UString::UString(const char *str) noexcept
+UString::UString(const char *str) USTRING_NOEXCEPT
 {
     mData.assign(str);
 }
 
-UString::UString(const UString& str) noexcept
+UString::UString(const UString& str) USTRING_NOEXCEPT
 {
     mData.assign(str.mData);
 }
