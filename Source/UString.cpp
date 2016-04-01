@@ -274,13 +274,13 @@ UString UString::subStr(std::size_t start, std::size_t len) const
 
 std::size_t UString::find(UChar ch, std::size_t pos) const
 {
-    uint32_t idx = 0;
-    for( auto c : *this )
-    {
-        if( c == ch )
-            return idx;
-        idx++;
-    }
+    auto startIter = begin();
+    if( pos != npos )
+        std::advance(startIter, pos);
+    
+    auto iter = std::find(startIter, end(), ch);
+    if( iter != end() )
+        return std::distance(begin(), iter);
     
     return npos;
 }

@@ -25,10 +25,11 @@
 
 TEST_CASE("Find Tests", "[UString]") 
 {
-    REQUIRE( UString("abcέdeήίΰαa0").find(0x03AD) == 3 );
-    REQUIRE( UString("asdaέ2dd").find(UString(u8"έ2dd")) == 4 );
-    REQUIRE( UString("blahaέblah").find(UString("blah"), 3) == 6 );
-    REQUIRE( UString("abcfooabcde").findLastOf("ab") == 7 );
+    REQUIRE( UString(u8"abcέdeήίΰέαa0").find(0x03AD) == 3 );
+    REQUIRE( UString(u8"abcέdeήίΰέαa0").find(0x03AD, 5) == 9 );
+    REQUIRE( UString(u8"asdaέ2dd").find(u8"έ2dd") == 4 );
+    REQUIRE( UString(u8"blahaέblah").find("blah", 3) == 6 );
+    REQUIRE( UString(u8"abcfooabcde").findLastOf("ab") == 7 );
     REQUIRE( UString(u8"abήίΰcfooabcήίΰde").findLastOf(u8"ήίΰ") == 14 );
     REQUIRE( UString(u8"abήίΰcfooabcήίΰde").findLastOf(u8"ήίΰ", 6) == 4 );
     REQUIRE( UString("abcέdeήίΰέαa0").findLastOf(0x03AD) == 9 );
