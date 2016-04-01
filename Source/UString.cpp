@@ -270,19 +270,16 @@ UString UString::subStr(std::size_t start, std::size_t len) const
     return retStr;
 }
 
-std::size_t UString::find(UChar ch, std::size_t start) const
+std::size_t UString::find(UChar ch, std::size_t pos) const
 {
-    utf8::iterator<std::string::const_iterator> iter(mData.begin(), mData.begin(), mData.end());
-    utf8::iterator<std::string::const_iterator> endIter(mData.end(), mData.begin(), mData.end());
-    
-    if( start > 0 )
-        utf8::advance(iter, start, endIter);
-    
-    for( uint32_t idx=0; iter != endIter; iter++, idx++ )
+    uint32_t idx = 0;
+    for( auto c : *this )
     {
-        if ( *iter == ch )
+        if( c == ch )
             return idx;
+        idx++;
     }
+    
     return npos;
 }
 
