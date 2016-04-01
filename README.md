@@ -10,10 +10,9 @@ UString is a open-source C++11 UTF-8 String library, that is free for personal a
   * Category information
   * Type information
  * Encoding conversion between UTF-8/16/32
- * STL style iterator
+ * STL compatible iterators
  * Character-based access
  * Unit tests
- * Documentation
  
 ## Building ##
 Building is very easy using the CMake build system. It will automatically download and generate the required Unicode data using a simple python script. In the future I may include the generated source in the git repository, but for now you must generate it using the script.
@@ -28,11 +27,13 @@ You can use ccmake to see the variables you can set. Such as building dynamic or
 UString is still in VERY early stages, so the API is still subject to much change. I welcome any contributions such as code, bug fixes, etc.
 
 ## TODO ##
- * Manipulation functions
-  * replace, ~~sub-string~~, etc
- * Formatting functions
- * More operator support
- * More everything!
+- [ ] Documentation
+- [ ] Replace methods
+- [ ] Erase methods (erase (by iter, index, etc), clear, ...)
+- [ ] Compare methods & operators (<, >, ...)
+- [ ] More find methods (findLastOf, findFirstOf, etc)
+- [ ] UTF-8 validation 
+- [ ] Compose and formatting functions
 
 ## License (MIT) ##
 Copyright (c) 2016 Jeremy Harmon
