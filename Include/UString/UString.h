@@ -38,7 +38,7 @@
             UString(const char *str) USTRING_NOEXCEPT;
             explicit UString(UChar ch) USTRING_NOEXCEPT;
             
-            static const size_t npos = -1;
+            static const size_t npos = std::string::npos;
             
             // Assignment
             UString& assign(const UString& str);
