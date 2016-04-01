@@ -20,6 +20,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
                                                         
+#include <algorithm>
+
 #include "UString.h"
 #include "utf8/utf8.h"
 
@@ -285,30 +287,13 @@ std::size_t UString::find(UChar ch, std::size_t pos) const
 
 std::size_t UString::find(const UString& find, std::size_t start) const
 {
-    const std::size_t len = length();
-    if( len - start < find.length() )
-        return npos;
-
-    for( std::size_t i=start; i<len; i++ )
-    {
-        if( at(i) == find.at(0) )
-        {
-            uint32_t startPos = i;
-            bool found = true;
-            for( std::size_t j=1; j<find.length(); j++)
-            {
-                i++;
-                if( at(i) == find.at(i) )
-                {
-                    found = false;
-                    break;
-                }
-            }
-
-            if( found )
-                return startPos;
-        }
-    }
-
+    auto startIter = begin();
+    if( start != npos )
+        std::advance(startIter, start);
+    
+    auto iter = std::search(startIter, end(), find.begin(), find.end());
+    if( iter != end() )
+        return std::distance(begin(), iter);
+        
     return npos;
 }
