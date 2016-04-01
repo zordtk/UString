@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 set(USTRING_TEST_SRCS
+    TestIterator.cpp
     Test.cpp
     TestConversion.cpp
     TestComparison.cpp
@@ -28,7 +29,6 @@ set(USTRING_TEST_SRCS
     TestSubstring.cpp
     TestFind.cpp
     TestUChar.cpp
-    TestIterator.cpp
 )
 
 if( BUILD_TESTS )

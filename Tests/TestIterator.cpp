@@ -43,4 +43,12 @@ TEST_CASE("Iterator", "[UString]")
     
     iter = std::prev(iter, 3);
     REQUIRE( *iter == 'g' ); 
+
+    UString::ReverseIterator riter;
+    UChar reverseChars[] = { 0x3b1, 0x3b0, 0x3af, 0x3ae, 0x3ad, 0x3ac, 0x69, 0x68, 0x67, 0x66, 0x65, 0x64, 0x63, 0x62, 0x61};
+    uint32_t idx = 0;
+    for( riter = test.rbegin(); riter != test.rend(); riter++, idx++ )
+    {
+        REQUIRE( *riter == reverseChars[idx] );
+    }
 }

@@ -99,6 +99,7 @@
             {
                 public:
                     typedef UChar value_type;
+                    using reference = UChar;
                     
                     IteratorBase() = default;
                     IteratorBase(const IterType& begin, const IterType& end, const IterType& pos)
@@ -128,11 +129,60 @@
                     IterType mIter;
             };
             
-            typedef IteratorBase<std::string::iterator>        Iterator;
-            typedef IteratorBase<std::string::const_iterator>  ConstIterator;
+            template<typename IterType>
+            class ReverseIteratorBase : public std::reverse_iterator<IterType>
+            {
+                public:
+                    using BaseIterator = std::reverse_iterator<IterType>;
+                    
+                    ReverseIteratorBase() = default;
+                                        
+                    ReverseIteratorBase(const ReverseIteratorBase<IterType>& iter)
+                        : BaseIterator(iter)
+                    {
+                        
+                    }
+                    
+                    ReverseIteratorBase(const std::reverse_iterator<IterType>& iter)
+                        : BaseIterator(iter)
+                    {
+                        
+                    }
 
+                    ReverseIteratorBase(const IterType& iter)
+                        : BaseIterator(iter)
+                    {
+                        
+                    }
+                    
+                    ReverseIteratorBase& operator++()                   { BaseIterator::operator++(); return *this; }
+                    ReverseIteratorBase  operator++(int)                { return BaseIterator::operator++(1); }
+                    ReverseIteratorBase& operator--()                   { BaseIterator::operator--(); return *this; }
+                    ReverseIteratorBase  operator--(int)                { return BaseIterator::operator--(1); }
+                    IterType             base() const                   { return BaseIterator::base(); }
+                    const UChar          operator*() const              { BaseIterator::operator*(); }
+                    bool operator!=(const ReverseIteratorBase& other)   { return( other.base() != this->base() ); }
+                    bool operator==(const ReverseIteratorBase& other)   { return( other.base() == this->base() ); }
+            };
+            
+            
+            using Iterator              = IteratorBase<std::string::iterator>;
+            using ConstIterator         = IteratorBase<std::string::const_iterator>;
+            using ReverseIterator       = ReverseIteratorBase<Iterator>;
+            using ConstReverseIterator  = ReverseIteratorBase<ConstIterator>;
+            
+            // For STL
+            using iterator                  = Iterator;
+            using const_iterator            = ConstIterator;
+            using reverse_iterator          = ReverseIterator;
+            using const_reverse_iterator    = ConstReverseIterator;
+            
             Iterator begin();
             Iterator end();
+            inline ReverseIterator rbegin() { return ReverseIterator(end()); }
+            inline ReverseIterator rend()   { return ReverseIterator(begin()); }
+            
+            //ReverseIteratorBase rend()   { return ReverseIteratorBase<Iterator>(end()); }
             ConstIterator begin() const;
             ConstIterator end() const;
             
