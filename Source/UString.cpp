@@ -55,6 +55,16 @@ UString& UString::assign(const char* str)
     return *this;
 }
 
+UString& UString::operator=(const UString& str)
+{
+    return assign(str);
+}
+
+UString& UString::operator=(const char* str)
+{
+    return assign(str);
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////
 /// Append/Prepend                                                                    ///
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -322,4 +332,34 @@ std::size_t UString::findLastOf(const UString& find, std::size_t pos) const
         return length() - std::distance(rbegin(), iter) - 1;
     
     return npos;
+}
+
+UString UString::replace(std::size_t start, std::size_t len, const UString& with) const
+{
+    UString retStr;
+
+    auto firstHalfIter = begin();
+    std::advance(firstHalfIter, start);
+    std::copy(begin(), firstHalfIter, std::back_inserter(retStr));
+    
+    retStr.append(with);
+    auto secondHalfIter = begin();
+    std::advance(secondHalfIter, start+len);
+    std::copy(secondHalfIter, end(), std::back_inserter(retStr));
+
+    return retStr;
+}
+
+UString UString::replaceAll(const UString& what, const UString& with) const
+{
+    UString retStr = *this;
+
+    std::size_t startPos = 0;
+    while( (startPos = retStr.find(what, startPos)) != npos ) 
+    {
+        retStr    = retStr.replace(startPos, what.length(), with);
+        startPos += with.length();
+    }
+
+    return retStr;
 }

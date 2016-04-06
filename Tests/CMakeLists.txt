@@ -29,6 +29,7 @@ set(USTRING_TEST_SRCS
     TestSubstring.cpp
     TestFind.cpp
     TestUChar.cpp
+    TestReplace.cpp
 )
 
 if( BUILD_TESTS )

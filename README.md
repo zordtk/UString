@@ -28,7 +28,7 @@ UString is still in VERY early stages, so the API is still subject to much chang
 
 ## TODO ##
 - [ ] Documentation
-- [ ] Replace methods
+- [x] Replace methods
 - [ ] Erase methods (erase (by iter, index, etc), clear, ...)
 - [ ] Compare methods & operators (<, >, ...)
 - [ ] More find methods (~~findLastOf~~, findFirstOf, etc)
