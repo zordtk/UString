@@ -30,6 +30,7 @@ set(USTRING_TEST_SRCS
     TestFind.cpp
     TestUChar.cpp
     TestReplace.cpp
+    TestErase.cpp
 )
 
 if( BUILD_TESTS )

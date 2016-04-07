@@ -398,3 +398,41 @@ UString& UString::replaceLast(const UString& what, const UString& with, std::siz
     assign(retStr);
     return *this;
 }
+
+UString& UString::erase(const UString::Iterator& start, const UString::Iterator& stop)
+{
+    UString retStr;
+        
+    std::copy(begin(), start, std::back_inserter(retStr));
+    std::copy(stop, end(), std::back_inserter(retStr));
+
+    assign(retStr);
+    return *this;
+}
+
+UString& UString::erase(std::size_t start, std::size_t num)
+{
+    if( start == 0 )
+    {
+        assign(subStr(num));
+        return *this;
+    }
+    else if( start == length()-1 )
+    {
+        assign(subStr(0, length()-1));
+        return *this;
+    }
+
+    UString retStr;
+    auto firstHalfIter = begin();
+    auto secondHalfIter = begin();
+
+    std::advance(firstHalfIter, start);
+    std::advance(secondHalfIter, start+num);
+
+    std::copy(begin(), firstHalfIter, std::back_inserter(retStr));
+    std::copy(secondHalfIter, end(), std::back_inserter(retStr));
+
+    assign(retStr);
+    return *this;
+}

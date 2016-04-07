@@ -63,6 +63,116 @@
         public:
             typedef UChar value_type;
 
+            /*! Base class for Iterators used in UString
+             *
+             * This is a bidirectional iterator Random access can not be provided because all index operations
+             * need to iterate through UTF-8 characters, which can be multiple bytes. The iterator is not writable
+             * because UTF-8 characters are not a fixed size changing one codepoint to another could overwrite
+             * another codepoint. This would invalidate any iterators to the string.
+             */
+            template<typename IterType>
+            class IteratorBase : public std::iterator<std::bidirectional_iterator_tag, UChar>
+            {
+                public:
+                    typedef UChar value_type;
+                    using reference = UChar;
+
+                    /*! Create a empty Iterator without a reference to any part of a string
+                     */
+                    IteratorBase() = default;
+                    /*! Increment the iterator position
+                     * @return Reference to this iterator
+                     */
+                    IteratorBase& operator++() { utf8::next(mIter, mRangeEnd); return *this; }
+                    /*! Increment the iterator position
+                     * @return Reference to this iterator
+                     */
+                    IteratorBase  operator++(int) { IteratorBase temp = *this; utf8::next(mIter, mRangeStart); return temp; }
+                    /*! Decrement the iterator position
+                     * @return Reference to this iterator
+                     */
+                    IteratorBase& operator--() { utf8::prior(mIter, mRangeStart); return *this; }
+                    /*! Decrement the iterator position
+                     * @return Reference to this iterator
+                     */
+                    IteratorBase  operator--(int) { IteratorBase temp = *this; utf8::prior(mIter, mRangeEnd); return temp; }
+                    /*! The base iterator type
+                     * @return Base iterator
+                     */
+                    IterType base() const { return mIter; }
+                    /*! Return the value of the current position
+                     * @return The value
+                     */
+                    const UChar operator*() const { auto temp = mIter; return UChar(utf8::next(temp, mRangeEnd)); }
+                    /*! Compare this iterator with a other
+                     * @param other The iterator to compare it to
+                     * @return False if the iterators are equal, and True if they aren't
+                     */
+                    bool operator!=(const IteratorBase& other) { return !operator==(other); }
+                    /*! Compare this iterator with a other
+                     * @param other The iterator to compare it to
+                     * @return True if the iterator is equal to other
+                     */
+                    bool operator==(const IteratorBase& other)
+                    {
+                        return( mIter == other.mIter && mRangeStart == other.mRangeStart && mRangeEnd == other.mRangeEnd );
+                    }
+
+                private:
+                    friend class UString;
+
+                    IteratorBase(const IterType& begin, const IterType& end, const IterType& pos)
+                        : mRangeStart(begin), mRangeEnd(end), mIter(pos)
+                    {
+
+                    }
+
+
+                    IterType mRangeStart;
+                    IterType mRangeEnd;
+                    IterType mIter;
+            };
+
+            template<typename IterType>
+            class ReverseIteratorBase : public std::reverse_iterator<IterType>
+            {
+                public:
+                    using BaseIterator = std::reverse_iterator<IterType>;
+
+                    ReverseIteratorBase() = default;
+                    ReverseIteratorBase(const ReverseIteratorBase<IterType>& iter)
+                        : BaseIterator(iter)
+                    {
+
+                    }
+
+                    ReverseIteratorBase(const std::reverse_iterator<IterType>& iter)
+                        : BaseIterator(iter)
+                    {
+
+                    }
+
+                    ReverseIteratorBase(const IterType& iter)
+                        : BaseIterator(iter)
+                    {
+
+                    }
+
+                    ReverseIteratorBase& operator++()                   { BaseIterator::operator++(); return *this; }
+                    ReverseIteratorBase  operator++(int)                { return BaseIterator::operator++(1); }
+                    ReverseIteratorBase& operator--()                   { BaseIterator::operator--(); return *this; }
+                    ReverseIteratorBase  operator--(int)                { return BaseIterator::operator--(1); }
+                    IterType             base() const                   { return BaseIterator::base(); }
+                    const UChar          operator*() const              { return BaseIterator::operator*(); }
+                    bool operator!=(const ReverseIteratorBase& other)   { return( other.base() != this->base() ); }
+                    bool operator==(const ReverseIteratorBase& other)   { return( other.base() == this->base() ); }
+            };
+
+            using Iterator              = IteratorBase<std::string::iterator>;
+            using ConstIterator         = IteratorBase<std::string::const_iterator>;
+            using ReverseIterator       = ReverseIteratorBase<Iterator>;
+            using ConstReverseIterator  = ReverseIteratorBase<ConstIterator>;
+
             /*! Default constructor which creates an empty string.
              */
             UString() { }
@@ -303,115 +413,19 @@
              */
             UString& replaceLast(const UString& what, const UString& with, std::size_t end=npos);
 
-            /*! Base class for Iterators used in UString
-             *
-             * This is a bidirectional iterator Random access can not be provided because all index operations
-             * need to iterate through UTF-8 characters, which can be multiple bytes. The iterator is not writable
-             * because UTF-8 characters are not a fixed size changing one codepoint to another could overwrite
-             * another codepoint. This would invalidate any iterators to the string.
+            /*! Erase character(s) at given index
+             * @param start Iterator reference to position to begin erasing
+             * @param stop Iterator reference to position to stop erasing
+             * @return Reference to this object
              */
-            template<typename IterType>
-            class IteratorBase : public std::iterator<std::bidirectional_iterator_tag, UChar>
-            {
-                public:
-                    typedef UChar value_type;
-                    using reference = UChar;
+            UString& erase(const Iterator& start, const Iterator& stop);
 
-                    /*! Create a empty Iterator without a reference to any part of a string
-                     */
-                    IteratorBase() = default;
-                    /*! Increment the iterator position
-                     * @return Reference to this iterator
-                     */
-                    IteratorBase& operator++() { utf8::next(mIter, mRangeEnd); return *this; }
-                    /*! Increment the iterator position
-                     * @return Reference to this iterator
-                     */
-                    IteratorBase  operator++(int) { IteratorBase temp = *this; utf8::next(mIter, mRangeStart); return temp; }
-                    /*! Decrement the iterator position
-                     * @return Reference to this iterator
-                     */
-                    IteratorBase& operator--() { utf8::prior(mIter, mRangeStart); return *this; }
-                    /*! Decrement the iterator position
-                     * @return Reference to this iterator
-                     */
-                    IteratorBase  operator--(int) { IteratorBase temp = *this; utf8::prior(mIter, mRangeEnd); return temp; }
-                    /*! The base iterator type
-                     * @return Base iterator
-                     */
-                    IterType base() const { return mIter; }
-                    /*! Return the value of the current position
-                     * @return The value
-                     */
-                    const UChar operator*() const { auto temp = mIter; return UChar(utf8::next(temp, mRangeEnd)); }
-                    /*! Compare this iterator with a other
-                     * @param other The iterator to compare it to
-                     * @return False if the iterators are equal, and True if they aren't
-                     */
-                    bool operator!=(const IteratorBase& other) { return !operator==(other); }
-                    /*! Compare this iterator with a other
-                     * @param other The iterator to compare it to
-                     * @return True if the iterator is equal to other
-                     */
-                    bool operator==(const IteratorBase& other)
-                    {
-                        return( mIter == other.mIter && mRangeStart == other.mRangeStart && mRangeEnd == other.mRangeEnd );
-                    }
-
-                private:
-                    friend class UString;
-
-                    IteratorBase(const IterType& begin, const IterType& end, const IterType& pos)
-                        : mRangeStart(begin), mRangeEnd(end), mIter(pos)
-                    {
-
-                    }
-
-
-                    IterType mRangeStart;
-                    IterType mRangeEnd;
-                    IterType mIter;
-            };
-
-            template<typename IterType>
-            class ReverseIteratorBase : public std::reverse_iterator<IterType>
-            {
-                public:
-                    using BaseIterator = std::reverse_iterator<IterType>;
-
-                    ReverseIteratorBase() = default;
-                    ReverseIteratorBase(const ReverseIteratorBase<IterType>& iter)
-                        : BaseIterator(iter)
-                    {
-
-                    }
-
-                    ReverseIteratorBase(const std::reverse_iterator<IterType>& iter)
-                        : BaseIterator(iter)
-                    {
-
-                    }
-
-                    ReverseIteratorBase(const IterType& iter)
-                        : BaseIterator(iter)
-                    {
-
-                    }
-
-                    ReverseIteratorBase& operator++()                   { BaseIterator::operator++(); return *this; }
-                    ReverseIteratorBase  operator++(int)                { return BaseIterator::operator++(1); }
-                    ReverseIteratorBase& operator--()                   { BaseIterator::operator--(); return *this; }
-                    ReverseIteratorBase  operator--(int)                { return BaseIterator::operator--(1); }
-                    IterType             base() const                   { return BaseIterator::base(); }
-                    const UChar          operator*() const              { return BaseIterator::operator*(); }
-                    bool operator!=(const ReverseIteratorBase& other)   { return( other.base() != this->base() ); }
-                    bool operator==(const ReverseIteratorBase& other)   { return( other.base() == this->base() ); }
-            };
-
-            using Iterator              = IteratorBase<std::string::iterator>;
-            using ConstIterator         = IteratorBase<std::string::const_iterator>;
-            using ReverseIterator       = ReverseIteratorBase<Iterator>;
-            using ConstReverseIterator  = ReverseIteratorBase<ConstIterator>;
+            /*! Erase character(s) in given iterator range
+             * @param start Index of character to start erasing
+             * @param num Number of characters to erase
+             * @return Reference to this object
+             */
+            UString& erase(std::size_t start, std::size_t num=1);
 
             /*! Returns a iterator pointing to the beginning of the string
              * @return Iterator pointing to the start of the string
