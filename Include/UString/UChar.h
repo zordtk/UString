@@ -34,92 +34,182 @@
         #define    
     #endif
 
+    /*! UChar is used to represent a UTF-8 character
+     */ 
     class UChar
     {
         public:
             typedef std::uint32_t ValueType;
-            
+       
+            /*! Unicode categoiry types
+             */
             enum Category
             {
-                MarkNonSpacing,          //   Mn
-                MarkSpacingCombining,    //   Mc
-                MarkEnclosing,           //   Me
+                MarkNonSpacing,          //!<   Mn
+                MarkSpacingCombining,    //!<   Mc
+                MarkEnclosing,           //!<   Me
 
-                NumberDecimalDigit,      //   Nd
-                NumberLetter,            //   Nl
-                NumberOther,             //   No
+                NumberDecimalDigit,      //!<   Nd
+                NumberLetter,            //!<   Nl
+                NumberOther,             //!<   No
 
-                SeparatorSpace,          //   Zs
-                SeparatorLine,           //   Zl
-                SeparatorParagraph,      //   Zp
+                SeparatorSpace,          //!<   Zs
+                SeparatorLine,           //!<   Zl
+                SeparatorParagraph,      //!<   Zp
 
-                OtherControl,            //   Cc
-                OtherFormat,             //   Cf
-                OtherSurrogate,          //   Cs
-                OtherPrivateUse,         //   Co
-                OtherNotAssigned,        //   Cn
+                OtherControl,            //!<   Cc
+                OtherFormat,             //!<   Cf
+                OtherSurrogate,          //!<   Cs
+                OtherPrivateUse,         //!<   Co
+                OtherNotAssigned,        //!<   Cn
 
-                LetterUppercase,         //   Lu
-                LetterLowercase,         //   Ll
-                LetterTitlecase,         //   Lt
-                LetterModifier,          //   Lm
-                LetterOther,             //   Lo
+                LetterUppercase,         //!<   Lu
+                LetterLowercase,         //!<   Ll
+                LetterTitlecase,         //!<   Lt
+                LetterModifier,          //!<   Lm
+                LetterOther,             //!<   Lo
 
-                PunctuationConnector,    //   Pc
-                PunctuationDash,         //   Pd
-                PunctuationOpen,         //   Ps
-                PunctuationClose,        //   Pe
-                PunctuationInitialQuote, //   Pi
-                PunctuationFinalQuote,   //   Pf
-                PunctuationOther,        //   Po
+                PunctuationConnector,    //!<   Pc
+                PunctuationDash,         //!<   Pd
+                PunctuationOpen,         //!<   Ps
+                PunctuationClose,        //!<   Pe
+                PunctuationInitialQuote, //!<   Pi
+                PunctuationFinalQuote,   //!<   Pf
+                PunctuationOther,        //!<   Po
 
-                SymbolMath,              //   Sm
-                SymbolCurrency,          //   Sc
-                SymbolModifier,          //   Sk
-                SymbolOther,             //   So
+                SymbolMath,              //!<   Sm
+                SymbolCurrency,          //!<   Sc
+                SymbolModifier,          //!<   Sk
+                SymbolOther,             //!<   So
 
-                CatInvalid
+                CatInvalid               //!<   Internal
             };
             
+            /*! Unicode text direction
+             */
             enum Direction
             {
-                DirL, DirR, DirEN, DirES, DirET, DirAN, DirCS, DirB, DirS, DirWS, DirON,
-                DirLRE, DirLRO, DirAL, DirRLE, DirRLO, DirPDF, DirNSM, DirBN,
-                DirLRI, DirRLI, DirFSI, DirPDI, DirInvalid
+                DirL,       //!< Left-to-Right
+                DirR,       //!< Right-to-Left
+                DirEN,      //!< European Number
+                DirES,      //!< European Number Separator
+                DirET,      //!< European Number Terminator
+                DirAN,      //!< Arabic Number
+                DirCS,      //!< Common Number Separator
+                DirB,       //!< Paragraph Separator
+                DirS,       //!< Segment Separator
+                DirWS,      //!< Whitespace
+                DirON,      //!< Other Neutrals
+                DirLRE,     //!< Left-to-Right Embedding
+                DirLRO,     //!< Left-to-Right Override
+                DirAL,      //!< Right-to-Left Arabic
+                DirRLE,     //!< Right-to-Left Embedding
+                DirRLO,     //!< Right-to-Left Override
+                DirPDF,     //!< Pop Directional Format
+                DirNSM,     //!< Non-Spacing Mark
+                DirBN,      //!< Boundary Neutral
+                DirLRI,     //!< Left-to-Right Isolate
+                DirRLI,     //!< Right-to-Left Isolate
+                DirFSI,     //!< First Strong Isolate
+                DirPDI,     //!< Pop Directional Isolate
+                DirInvalid  //!< Internal
             };
-            
+
+
+            /*! Unicode text case
+             */
             enum Case
             {
                 CaseNone, CaseUpper, CaseLower, CaseTitle, CaseInvalid
             };
 
+            /*! Create a character with a Null value
+             */
             UChar() USTRING_NOEXCEPT;
+            /*! Create a character from the given code-point
+             * @param codePoin The UTF-8 code-point
+             */
             UChar(ValueType codePoint) USTRING_NOEXCEPT;
             
-            // Get functions
+            /*! Get the unicode Category of a given code-point
+             * @param ch The code-point
+             * @return The unicode Category
+             */
             static Category  getCategory(ValueType ch);
+            /*! Get the unicode Direction of a given code-point
+             * @param ch The code-point
+             * @return The unicode Direction
+             */
             static Direction getDirection(ValueType ch);
+            /*! Get the unicode Case of a given code-point
+             * @param ch The code-point
+             * @return The unicode Case
+             */
             static Case      getCase(ValueType ch);
-            
+
+            /*! Get the unicode Category of this char
+             * @return The unicode Category
+             */
             inline Category  getCategory() const { return getCategory(mChar); }
+            /*! Get the unicode Direction of this char
+             * @return The unicode Direction
+             */
             inline Direction getDirection() const { return getDirection(mChar); }
+            /*! Get the unicode Case of this char
+             * @return The unicode Case
+             */
             inline Case      getCase() const { return getCase(mChar); }
             
-            // Assignment
+            /*! Assign another UChar to this one
+             * @return A reference to this object
+             */
             UChar& assign(UChar codePoint);
+            /*! Assign another UChar to this one
+             * @return A reference to this object
+             */
             UChar& operator=(UChar codePoint);
             
-            // Comparison
+            /*! Compare this character to another
+             * @return True if it is equal, False if it isn't
+             */
             inline const bool operator==(UChar codePoint) const { return( mChar == codePoint ); }
+
+            /*! Compare this character to another
+             * @return True if it is equal, False if it isn't
+             */
             inline const bool operator==(int codePoint) const { return( mChar == codePoint ); }
+
+            /*! Compare this character to another
+             * @return True if it is not equal, False if it is equal
+             */
             inline const bool operator!=(UChar codePoint) const { return( mChar != codePoint ); }
 
-            // Case Conversion
+            /*! Convert a code point to the upper case version
+             * @param codePoint The code-point to convert
+             * @return A Uchar containing the uppercase version 
+             */
             static UChar toUpper(ValueType codePoint);
+            /*! Convert a code point to the lower case version
+             * @param codePoint The code-point to convert
+             * @return A Uchar containing the lowercase version 
+             */
             static UChar toLower(ValueType codePoint);
+            /*! Convert a code point to the title case version
+             * @param codePoint The code-point to convert
+             * @return A Uchar containing the titlecase version 
+             */
             static UChar toTitleCase(ValueType codePoint);
+            /*! Return a new UChar containing a uppercase version of this 
+             * @return A Uchar containing the uppercase version 
+             */
             inline UChar toUpper() const { return toUpper(mChar); } 
+            /*! Return a new UChar containing a lowercase version of this 
+             * @return A Uchar containing the lowercase version 
+             */
             inline UChar toLower() const { return toLower(mChar); }
+            /*! Return a new UChar containing a titlecase version of this 
+             * @return A Uchar containing the titlecase version 
+             */
             inline UChar toTitleCase() const { return toTitleCase(mChar); }
             
             // Is?? functions
