@@ -399,6 +399,12 @@ UString& UString::replaceLast(const UString& what, const UString& with, std::siz
     return *this;
 }
 
+UString& UString::clear()
+{
+    mData.clear();
+    return *this;
+}
+
 UString& UString::erase(const UString::Iterator& start, const UString::Iterator& stop)
 {
     UString retStr;

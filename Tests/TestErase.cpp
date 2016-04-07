@@ -29,7 +29,8 @@ TEST_CASE("Erase Tests", "[UString]")
     REQUIRE( UString(u8"ήίΰ").erase(1, 2) == u8"ή" );
     REQUIRE( UString(u8"ήίΰ").erase(0) == u8"ίΰ" );
     REQUIRE( UString(u8"ήίΰ").erase(2) == u8"ήί" );
-    
+    REQUIRE( UString("blah").clear() == "" );
+
     UString tmp(u8"testingήίΰfoo");
     REQUIRE( tmp.erase(std::next(tmp.begin(), 7), std::next(tmp.begin(), 10)) == "testingfoo" );
 }

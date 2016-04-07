@@ -420,6 +420,11 @@
              */
             UString& erase(const Iterator& start, const Iterator& stop);
 
+            /*! Clear this string
+             * @return Reference to this object
+             */
+            UString& clear();
+
             /*! Erase character(s) in given iterator range
              * @param start Index of character to start erasing
              * @param num Number of characters to erase
