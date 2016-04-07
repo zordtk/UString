@@ -11,7 +11,7 @@ UString is a open-source C++11 UTF-8 String library, that is free for personal a
  * Manipulation functions
   * Case conversion
   * Substring searching and replacment
-  * Full text replacment
+  * Full text replacement
  * Documented (very basic)
  * Fully unit tested!
  
