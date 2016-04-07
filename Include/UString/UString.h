@@ -272,13 +272,13 @@
 
             /*! Prepend a UChar to the current string
              *
-             * This is provieded for STL compatibility and simply calls append()
+             * This is provieded for STL compatibility and simply calls prepend()
              * @param ch Character to append
              */
             void push_front(UChar ch);
             /*! Prepend a UString to the current string
              *
-             * This is provieded for STL compatibility and simply calls append()
+             * This is provieded for STL compatibility and simply calls prepend()
              * @param str UString to append
              */
             void push_front(const UString& str);
