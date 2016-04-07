@@ -374,3 +374,17 @@ UString UString::replaceFirst(const UString& what, const UString& with, std::siz
 
     return retStr;
 }
+
+UString UString::replaceLast(const UString& what, const UString& with, std::size_t end) const
+{
+    UString retStr = *this;
+    if( end != npos )
+        end = length() - end;
+        
+    std::size_t pos = retStr.findLastOf(what, end);
+
+    if( pos != npos )
+        retStr = retStr.replace(pos-what.length()+1, what.length(), with);
+
+    return retStr;
+}

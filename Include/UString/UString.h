@@ -99,7 +99,7 @@
             UString replace(std::size_t start, std::size_t len, const UString& with) const;
             UString replaceAll(const UString& what, const UString& with, std::size_t start=0) const;
             UString replaceFirst(const UString& what, const UString& with, std::size_t start=0) const;
-            UString replaceLast(const UString& what, const UString& with, std::size_t start=0) const;
+            UString replaceLast(const UString& what, const UString& with, std::size_t end=npos) const;
 
             template<typename IterType>
             class IteratorBase : public std::iterator<std::bidirectional_iterator_tag, UChar>
