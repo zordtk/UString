@@ -19,7 +19,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
-                                                        
+
 #include "UString.h"
 #include "utf8/utf8.h"
 #include <algorithm>
@@ -277,7 +277,7 @@ UString UString::subStr(std::size_t start, std::size_t len) const
     }
     else
         endIter = mData.end();
-    
+
     std::copy(startIter, endIter, std::back_inserter(retStr.mData));
     return retStr;
 }
@@ -287,11 +287,11 @@ std::size_t UString::find(UChar ch, std::size_t pos) const
     auto startIter = begin();
     if( pos != npos )
         std::advance(startIter, pos);
-    
+
     auto iter = std::find(startIter, end(), ch);
     if( iter != end() )
         return std::distance(begin(), iter);
-    
+
     return npos;
 }
 
@@ -300,11 +300,11 @@ std::size_t UString::find(const UString& find, std::size_t start) const
     auto startIter = begin();
     if( start != npos )
         std::advance(startIter, start);
-    
+
     auto iter = std::search(startIter, end(), find.begin(), find.end());
     if( iter != end() )
         return std::distance(begin(), iter);
-        
+
     return npos;
 }
 
@@ -313,7 +313,7 @@ std::size_t UString::findLastOf(UChar ch, std::size_t pos) const
     auto startIter = rbegin();
     if( pos != npos )
         std::advance(startIter, pos);
-    
+
     auto iter = std::find(startIter, rend(), ch);
     if( iter != rend() )
         return length() - std::distance(rbegin(), iter) - 1;
@@ -326,11 +326,11 @@ std::size_t UString::findLastOf(const UString& find, std::size_t pos) const
     auto startIter = rbegin();
     if( pos != npos )
         std::advance(startIter, pos);
-    
+
     auto iter = std::search(startIter, rend(), find.rbegin(), find.rend());
     if( iter != rend() )
         return length() - std::distance(rbegin(), iter) - 1;
-    
+
     return npos;
 }
 
@@ -341,7 +341,7 @@ UString UString::replace(std::size_t start, std::size_t len, const UString& with
     auto firstHalfIter = begin();
     std::advance(firstHalfIter, start);
     std::copy(begin(), firstHalfIter, std::back_inserter(retStr));
-    
+
     retStr.append(with);
     auto secondHalfIter = begin();
     std::advance(secondHalfIter, start+len);
@@ -350,12 +350,12 @@ UString UString::replace(std::size_t start, std::size_t len, const UString& with
     return retStr;
 }
 
-UString UString::replaceAll(const UString& what, const UString& with) const
+UString UString::replaceAll(const UString& what, const UString& with, std::size_t start) const
 {
     UString retStr = *this;
 
-    std::size_t startPos = 0;
-    while( (startPos = retStr.find(what, startPos)) != npos ) 
+    std::size_t startPos = start;
+    while( (startPos = retStr.find(what, startPos)) != npos )
     {
         retStr    = retStr.replace(startPos, what.length(), with);
         startPos += with.length();

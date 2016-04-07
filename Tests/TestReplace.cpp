@@ -23,9 +23,10 @@
 #include "UString.h"
 #include "catch.hpp"
 
-TEST_CASE("Replacement Tests", "[UString]") 
+TEST_CASE("Replacement Tests", "[UString]")
 {
     REQUIRE( UString("test test test").replaceAll("test", "foo") == "foo foo foo" );
     REQUIRE( UString(u8"ήίΰ ήίΰ ήίΰ").replaceAll(u8"ήίΰ", u8"foo") == "foo foo foo" );
     REQUIRE( UString(u8"blahήίΰblah").replace(4, 3, "blah") == "blahblahblah" );
+    REQUIRE( UString(u8"ήίΰ ήίΰ ήίΰ").replaceAll(u8"ήίΰ", u8"foo", 4) == "ήίΰ foo foo" );
 }

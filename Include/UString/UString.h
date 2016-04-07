@@ -19,7 +19,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
-                                                        
+
 #ifndef _USTRING_USTRING_H_
 #define _USTRING_USTRING_H_
 
@@ -32,14 +32,14 @@
     {
         public:
             typedef UChar value_type;
-            
+
             UString() { }
             UString(const UString& str) USTRING_NOEXCEPT;
             UString(const char *str) USTRING_NOEXCEPT;
             explicit UString(UChar ch) USTRING_NOEXCEPT;
-            
+
             static const size_t npos = std::string::npos;
-            
+
             // Assignment
             UString& assign(const UString& str);
             UString& assign(const char* str);
@@ -52,44 +52,44 @@
             UString& append(const char* str);
             UString& operator+=(const char *str);
             UString& operator+=(const UString& str);
-            
+
             // push_back() is for STL compat and just calls append
             void push_back(UChar ch);
             void push_back(const UString& str);
-            
+
             UString& prepend(UChar ch);
             UString& prepend(const UString& str);
             UString& prepend(const char* str);
-            
+
             // push_front() is for STL compat and just calls prepend
             void push_front(UChar ch);
             void push_front(const UString& str);
 
-            
+
             // Comparison
             bool operator==(const UString& str) const;
             bool operator==(const char* str) const;
             bool operator!=(const UString& str) const;
             bool operator!=(const char* str) const;
-            
-            // Type conversion 
+
+            // Type conversion
             std::string toStdString() const;
             std::u16string toStdU16String() const;
             std::u32string toStdU32String() const;
-            
+
             static UString fromStdU16String(const std::u16string& str);
             static UString fromStdU32String(const std::u32string& str);
-            
+
             // Case Conversion
             UString toUpper() const;
             UString toLower() const;
             UString toTitleCase() const;
-            
+
             // Character Indexing
             const UChar at(std::size_t i) const;
             const UChar operator[](std::size_t i) const;
-            
-            // Substring 
+
+            // Substring
             UString subStr(std::size_t start, std::size_t len=npos) const;
             std::size_t find(UChar ch, std::size_t start=npos) const;
             std::size_t find(const UString& str, std::size_t start=npos) const;
@@ -97,33 +97,33 @@
             std::size_t findLastOf(const UString& find, std::size_t pos=npos) const;
 
             UString replace(std::size_t start, std::size_t len, const UString& with) const;
-            UString replaceAll(const UString& what, const UString& with) const;
-            
+            UString replaceAll(const UString& what, const UString& with, std::size_t start=0) const;
+
             template<typename IterType>
             class IteratorBase : public std::iterator<std::bidirectional_iterator_tag, UChar>
             {
                 public:
                     typedef UChar value_type;
                     using reference = UChar;
-                    
+
                     IteratorBase() = default;
                     IteratorBase(const IterType& begin, const IterType& end, const IterType& pos)
                         : mRangeStart(begin), mRangeEnd(end), mIter(pos)
                     {
 
                     }
-                    
+
                     IteratorBase& operator++() { utf8::next(mIter, mRangeEnd); return *this; }
                     IteratorBase  operator++(int) { IteratorBase temp = *this; utf8::next(mIter, mRangeStart); return temp; }
                     IteratorBase& operator--() { utf8::prior(mIter, mRangeStart); return *this; }
                     IteratorBase  operator--(int) { IteratorBase temp = *this; utf8::prior(mIter, mRangeEnd); return temp; }
-                    
+
                     IterType base() const { return mIter; }
-                    
+
                     const UChar operator*() const { auto temp = mIter; return UChar(utf8::next(temp, mRangeEnd)); }
-               
+
                     bool operator!=(const IteratorBase& other) { return !operator==(other); }
-                    bool operator==(const IteratorBase& other) 
+                    bool operator==(const IteratorBase& other)
                     {
                         return( mIter == other.mIter && mRangeStart == other.mRangeStart && mRangeEnd == other.mRangeEnd );
                     }
@@ -133,33 +133,33 @@
                     IterType mRangeEnd;
                     IterType mIter;
             };
-            
+
             template<typename IterType>
             class ReverseIteratorBase : public std::reverse_iterator<IterType>
             {
                 public:
                     using BaseIterator = std::reverse_iterator<IterType>;
-                    
+
                     ReverseIteratorBase() = default;
-                                        
+
                     ReverseIteratorBase(const ReverseIteratorBase<IterType>& iter)
                         : BaseIterator(iter)
                     {
-                        
+
                     }
-                    
+
                     ReverseIteratorBase(const std::reverse_iterator<IterType>& iter)
                         : BaseIterator(iter)
                     {
-                        
+
                     }
 
                     ReverseIteratorBase(const IterType& iter)
                         : BaseIterator(iter)
                     {
-                        
+
                     }
-                    
+
                     ReverseIteratorBase& operator++()                   { BaseIterator::operator++(); return *this; }
                     ReverseIteratorBase  operator++(int)                { return BaseIterator::operator++(1); }
                     ReverseIteratorBase& operator--()                   { BaseIterator::operator--(); return *this; }
@@ -169,13 +169,13 @@
                     bool operator!=(const ReverseIteratorBase& other)   { return( other.base() != this->base() ); }
                     bool operator==(const ReverseIteratorBase& other)   { return( other.base() == this->base() ); }
             };
-            
-            
+
+
             using Iterator              = IteratorBase<std::string::iterator>;
             using ConstIterator         = IteratorBase<std::string::const_iterator>;
             using ReverseIterator       = ReverseIteratorBase<Iterator>;
             using ConstReverseIterator  = ReverseIteratorBase<ConstIterator>;
-           
+
             inline Iterator begin()                     { return Iterator(mData.begin(), mData.end(), mData.begin()); }
             inline Iterator end()                       { return Iterator(mData.begin(), mData.end(), mData.end()); }
             inline ConstIterator begin() const          { return ConstIterator(mData.begin(), mData.end(), mData.begin()); }
@@ -184,7 +184,7 @@
             inline ReverseIterator rend()               { return ReverseIterator(begin()); }
             inline ConstReverseIterator rbegin() const  { return ConstReverseIterator(end()); }
             inline ConstReverseIterator rend() const    { return ConstReverseIterator(begin()); }
-            
+
             // For STL
             using iterator                  = Iterator;
             using const_iterator            = ConstIterator;
@@ -193,8 +193,8 @@
 
             // Size
             std::size_t length() const;
-            std::size_t size() const;  
-            std::size_t maxSize() const;  
+            std::size_t size() const;
+            std::size_t maxSize() const;
         protected:
             std::string mData;
     };
