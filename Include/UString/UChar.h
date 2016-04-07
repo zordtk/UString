@@ -31,7 +31,7 @@
     #if defined(HAVE_NOEXCEPT)
         #define USTRING_NOEXCEPT noexcept
     #else
-        #define    
+        #define USTRING_NOEXCEPT
     #endif
 
     /*! UChar is used to represent a UTF-8 character
