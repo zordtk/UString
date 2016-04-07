@@ -31,11 +31,8 @@ Documentation is still very sparse, but you can browse the documentation online 
 UString is still in VERY early stages, so the API is still subject to much change. I welcome any contributions such as code, bug fixes, etc.
 
 ## TODO ##
-- [x] Documentation
-- [x] Replace methods
 - [ ] Erase methods (erase (by iter, index, etc), clear, ...)
 - [ ] Compare methods & operators (<, >, ...)
-- [ ] More find methods (~~findLastOf~~, findFirstOf, etc)
 - [ ] UTF-8 validation 
 - [ ] Compose and formatting functions
 
