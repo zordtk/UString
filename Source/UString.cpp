@@ -162,28 +162,34 @@ bool UString::operator!=(const char* str) const
 /////////////////////////////////////////////////////////////////////////////////////////
 /// Case Conversion                                                                   ///
 /////////////////////////////////////////////////////////////////////////////////////////
-UString UString::toLower() const
+UString& UString::toLower()
 {
     UString tmp;
     for( UChar ch : *this )
         tmp.append(ch.toLower());
-    return tmp;
+
+    assign(tmp);
+    return *this;
 }
 
-UString UString::toUpper() const
+UString& UString::toUpper()
 {
     UString tmp;
     for( UChar ch : *this )
         tmp.append(ch.toUpper());
-    return tmp;
+
+    assign(tmp);
+    return *this;
 }
 
-UString UString::toTitleCase() const
+UString& UString::toTitleCase()
 {
     UString tmp;
     for( UChar ch : *this )
         tmp.append(ch.toTitleCase());
-    return tmp;
+
+    assign(tmp);
+    return *this;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -334,7 +340,7 @@ std::size_t UString::findLastOf(const UString& find, std::size_t pos) const
     return npos;
 }
 
-UString UString::replace(std::size_t start, std::size_t len, const UString& with) const
+UString& UString::replace(std::size_t start, std::size_t len, const UString& with)
 {
     UString retStr;
 
@@ -347,10 +353,11 @@ UString UString::replace(std::size_t start, std::size_t len, const UString& with
     std::advance(secondHalfIter, start+len);
     std::copy(secondHalfIter, end(), std::back_inserter(retStr));
 
-    return retStr;
+    assign(retStr);
+    return *this;
 }
 
-UString UString::replaceAll(const UString& what, const UString& with, std::size_t start) const
+UString& UString::replaceAll(const UString& what, const UString& with, std::size_t start)
 {
     UString retStr = *this;
 
@@ -361,10 +368,11 @@ UString UString::replaceAll(const UString& what, const UString& with, std::size_
         startPos += with.length();
     }
 
-    return retStr;
+    assign(retStr);
+    return *this;
 }
 
-UString UString::replaceFirst(const UString& what, const UString& with, std::size_t start) const
+UString& UString::replaceFirst(const UString& what, const UString& with, std::size_t start)
 {
     UString retStr = *this;
 
@@ -372,10 +380,11 @@ UString UString::replaceFirst(const UString& what, const UString& with, std::siz
     if( pos != npos )
         retStr = retStr.replace(pos, what.length(), with);
 
-    return retStr;
+    assign(retStr);
+    return *this;
 }
 
-UString UString::replaceLast(const UString& what, const UString& with, std::size_t end) const
+UString& UString::replaceLast(const UString& what, const UString& with, std::size_t end)
 {
     UString retStr = *this;
     if( end != npos )
@@ -386,5 +395,6 @@ UString UString::replaceLast(const UString& what, const UString& with, std::size
     if( pos != npos )
         retStr = retStr.replace(pos-what.length()+1, what.length(), with);
 
-    return retStr;
+    assign(retStr);
+    return *this;
 }

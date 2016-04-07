@@ -81,9 +81,9 @@
             static UString fromStdU32String(const std::u32string& str);
 
             // Case Conversion
-            UString toUpper() const;
-            UString toLower() const;
-            UString toTitleCase() const;
+            UString& toUpper();
+            UString& toLower();
+            UString& toTitleCase();
 
             // Character Indexing
             const UChar at(std::size_t i) const;
@@ -96,10 +96,10 @@
             std::size_t findLastOf(UChar ch, std::size_t pos=npos) const;
             std::size_t findLastOf(const UString& find, std::size_t pos=npos) const;
 
-            UString replace(std::size_t start, std::size_t len, const UString& with) const;
-            UString replaceAll(const UString& what, const UString& with, std::size_t start=0) const;
-            UString replaceFirst(const UString& what, const UString& with, std::size_t start=0) const;
-            UString replaceLast(const UString& what, const UString& with, std::size_t end=npos) const;
+            UString& replace(std::size_t start, std::size_t len, const UString& with);
+            UString& replaceAll(const UString& what, const UString& with, std::size_t start=0);
+            UString& replaceFirst(const UString& what, const UString& with, std::size_t start=0);
+            UString& replaceLast(const UString& what, const UString& with, std::size_t end=npos);
 
             template<typename IterType>
             class IteratorBase : public std::iterator<std::bidirectional_iterator_tag, UChar>
