@@ -24,6 +24,9 @@ make
 ```
 You can use ccmake to see the variables you can set. Such as building dynamic or static library, building the unit tests, and automatically running the unit tests on build.
 
+## Documentation ##
+Documentation is still very sparse, but you can browse the documentation online at http://zordtk.github.io/ustring_docs/. Alternatively you can generate offline docs using Doxygen.
+
 ## Development ##
 UString is still in VERY early stages, so the API is still subject to much change. I welcome any contributions such as code, bug fixes, etc.
 
