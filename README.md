@@ -5,15 +5,15 @@ UString is a open-source C++11 UTF-8 String library, that is free for personal a
 [![Build Status](https://travis-ci.org/zordtk/ustring.svg?branch=master)](https://travis-ci.org/zordtk/ustring)
 
 ## Features ##
- * Unicode character database
-  * Case conversion
-  * Category information
-  * Type information
+ * Unicode character information (typecase, category, direction, etc)
  * Encoding conversion between UTF-8/16/32
  * STL compatible iterators
- * Character-based access
- * Documentation (very basic)
- * Unit tests
+ * Manipulation functions
+  * Case conversion
+  * Substring searching and replacment
+  * Full text replacment
+ * Documented (very basic)
+ * Fully unit tested!
  
 ## Building ##
 Building is very easy using the CMake build system. It will automatically download and generate the required Unicode data using a simple python script. In the future I may include the generated source in the git repository, but for now you must generate it using the script.
