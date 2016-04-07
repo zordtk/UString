@@ -42,19 +42,19 @@ UChar::UChar(ValueType codePoint) USTRING_NOEXCEPT
     
 }
 
-UChar& UChar::assign(UChar codePoint) USTRING_NOEXCEPT
+UChar& UChar::assign(UChar codePoint)
 {
     mChar = codePoint;
     return *this;
 }
 
-UChar& UChar::operator=(UChar codePoint) USTRING_NOEXCEPT
+UChar& UChar::operator=(UChar codePoint)
 {
     mChar = codePoint;
     return *this;
 }
 
-bool UChar::isSpace(ValueType codePoint) USTRING_NOEXCEPT
+bool UChar::isSpace(ValueType codePoint)
 {
     if( codePoint > UCHAR_CODE_MAX )
         return false;
@@ -63,7 +63,7 @@ bool UChar::isSpace(ValueType codePoint) USTRING_NOEXCEPT
             codePoint == 0xA0 || isCodePointInArray(UCharWhitespace, UCHAR_NUM_WHITESPACE, codePoint))) );
 }
 
-bool UChar::isLetter(ValueType codePoint) USTRING_NOEXCEPT
+bool UChar::isLetter(ValueType codePoint)
 {
     for( std::uint32_t i = 0; i < UCHAR_NUM_LETTERS; i++ )
     {
@@ -73,54 +73,54 @@ bool UChar::isLetter(ValueType codePoint) USTRING_NOEXCEPT
     return false;
 }
 
-bool UChar::isControl(ValueType codePoint) USTRING_NOEXCEPT
+bool UChar::isControl(ValueType codePoint)
 {
     if( codePoint > UCHAR_CODE_MAX )
         return false;
     return( isCodePointInArray(UCharControls, UCHAR_NUM_CONTROLS, codePoint) );
 }
 
-bool UChar::isNumber(ValueType codePoint) USTRING_NOEXCEPT
+bool UChar::isNumber(ValueType codePoint)
 {
     if( codePoint > UCHAR_CODE_MAX )
         return false;
     return( isCodePointInArray(UCharNumbers, UCHAR_NUM_NUMBERS, codePoint) );
 }
 
-bool UChar::isLineBreak(ValueType codePoint) USTRING_NOEXCEPT
+bool UChar::isLineBreak(ValueType codePoint)
 {
     if( codePoint > UCHAR_CODE_MAX )
         return false;
     return( isCodePointInArray(UCharLinebreaks, UCHAR_NUM_LINEBREAKS, codePoint) );
 }
 
-bool UChar::isSymbol(ValueType codePoint) USTRING_NOEXCEPT
+bool UChar::isSymbol(ValueType codePoint)
 {
     if( codePoint > UCHAR_CODE_MAX )
         return false;
     return( isCodePointInArray(UCharSymbols, UCHAR_NUM_SYMBOLS, codePoint) );
 }
 
-bool UChar::isPunctuation(ValueType codePoint) USTRING_NOEXCEPT
+bool UChar::isPunctuation(ValueType codePoint)
 {
     if( codePoint > UCHAR_CODE_MAX )
         return false;
     return( isCodePointInArray(UCharPunctuations, UCHAR_NUM_PUNCTUATIONS, codePoint) );
 }
 
-bool UChar::isSurrogate(ValueType codePoint) USTRING_NOEXCEPT
+bool UChar::isSurrogate(ValueType codePoint)
 {
     if( codePoint > UCHAR_CODE_MAX )
         return false;
     return( isCodePointInArray(UCharSurrogates, UCHAR_NUM_SURROGATES, codePoint) );
 } 
 
-bool UChar::isNull(ValueType codePoint) USTRING_NOEXCEPT
+bool UChar::isNull(ValueType codePoint)
 {
     return( codePoint == UCHAR_CODE_NULL );
 }
 
-bool UChar::isLower(ValueType codePoint) USTRING_NOEXCEPT
+bool UChar::isLower(ValueType codePoint)
 {
     if( codePoint > UCHAR_CODE_MAX )
         return false;   
@@ -129,7 +129,7 @@ bool UChar::isLower(ValueType codePoint) USTRING_NOEXCEPT
     return ( l->characterCase == Case::CaseLower );
 }
 
-bool UChar::isUpper(ValueType codePoint) USTRING_NOEXCEPT
+bool UChar::isUpper(ValueType codePoint)
 {
     if( codePoint > UCHAR_CODE_MAX )
         return false;   
@@ -138,7 +138,7 @@ bool UChar::isUpper(ValueType codePoint) USTRING_NOEXCEPT
     return ( l->characterCase == Case::CaseUpper );
 }
 
-bool UChar::isTitleCase(ValueType codePoint) USTRING_NOEXCEPT
+bool UChar::isTitleCase(ValueType codePoint)
 {
     if( codePoint > UCHAR_CODE_MAX )
         return false;   
@@ -147,7 +147,7 @@ bool UChar::isTitleCase(ValueType codePoint) USTRING_NOEXCEPT
     return ( l->characterCase == Case::CaseTitle );
 }
 
-UChar UChar::toLower(ValueType codePoint) USTRING_NOEXCEPT
+UChar UChar::toLower(ValueType codePoint)
 {
     if( codePoint > UCHAR_CODE_MAX )
         return UChar(codePoint);   
@@ -159,7 +159,7 @@ UChar UChar::toLower(ValueType codePoint) USTRING_NOEXCEPT
     return l->lowerVersion;
 }
 
-UChar UChar::toUpper(ValueType codePoint) USTRING_NOEXCEPT
+UChar UChar::toUpper(ValueType codePoint)
 {
     if( codePoint > UCHAR_CODE_MAX )
         return UChar(codePoint);   
@@ -171,7 +171,7 @@ UChar UChar::toUpper(ValueType codePoint) USTRING_NOEXCEPT
     return l->upperVersion;
 }
 
-UChar UChar::toTitleCase(ValueType codePoint) USTRING_NOEXCEPT
+UChar UChar::toTitleCase(ValueType codePoint)
 {
     if( codePoint > UCHAR_CODE_MAX )
         return UChar(codePoint);   
@@ -183,7 +183,7 @@ UChar UChar::toTitleCase(ValueType codePoint) USTRING_NOEXCEPT
     return l->titleVersion;
 }
 
-UChar::Direction UChar::getDirection(ValueType ch) USTRING_NOEXCEPT
+UChar::Direction UChar::getDirection(ValueType ch)
 {
      // Search UCharLetters
     for( std::uint32_t i = 0; i< UCHAR_NUM_LETTERS; i++ )
@@ -257,7 +257,7 @@ UChar::Direction UChar::getDirection(ValueType ch) USTRING_NOEXCEPT
     return DirInvalid;
 }
 
-UChar::Category UChar::getCategory(ValueType ch) USTRING_NOEXCEPT
+UChar::Category UChar::getCategory(ValueType ch)
 {
     // TODO: Should this be replaced with something faster? Really how much
     //       is it going to be used??
@@ -335,7 +335,7 @@ UChar::Category UChar::getCategory(ValueType ch) USTRING_NOEXCEPT
     return CatInvalid;
 }
 
-UChar::Case UChar::getCase(ValueType ch) USTRING_NOEXCEPT
+UChar::Case UChar::getCase(ValueType ch)
 {
     for( std::uint32_t i=0; i<UCHAR_NUM_LETTERS; i++ )
     {

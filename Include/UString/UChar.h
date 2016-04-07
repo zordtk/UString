@@ -29,9 +29,9 @@
     #include "UnicodeData.h"
 
     #if defined(HAVE_NOEXCEPT)
-        #define USTRING_NOEXCEPT    noexcept
+        #define USTRING_NOEXCEPT noexcept
     #else
-        #define USTRING_NOEXCEPT    
+        #define    
     #endif
 
     class UChar
@@ -97,60 +97,60 @@
             UChar(ValueType codePoint) USTRING_NOEXCEPT;
             
             // Get functions
-            static Category  getCategory(ValueType ch) USTRING_NOEXCEPT;
-            static Direction getDirection(ValueType ch) USTRING_NOEXCEPT;
-            static Case      getCase(ValueType ch) USTRING_NOEXCEPT;
+            static Category  getCategory(ValueType ch);
+            static Direction getDirection(ValueType ch);
+            static Case      getCase(ValueType ch);
             
-            inline Category  getCategory() const USTRING_NOEXCEPT { return getCategory(mChar); }
-            inline Direction getDirection() const USTRING_NOEXCEPT { return getDirection(mChar); }
-            inline Case      getCase() const USTRING_NOEXCEPT { return getCase(mChar); }
+            inline Category  getCategory() const { return getCategory(mChar); }
+            inline Direction getDirection() const { return getDirection(mChar); }
+            inline Case      getCase() const { return getCase(mChar); }
             
             // Assignment
-            UChar& assign(UChar codePoint) USTRING_NOEXCEPT;
-            UChar& operator=(UChar codePoint) USTRING_NOEXCEPT;
+            UChar& assign(UChar codePoint);
+            UChar& operator=(UChar codePoint);
             
             // Comparison
-            inline const bool operator==(UChar codePoint) const USTRING_NOEXCEPT { return( mChar == codePoint ); }
-            inline const bool operator==(int codePoint) const USTRING_NOEXCEPT { return( mChar == codePoint ); }
-            inline const bool operator!=(UChar codePoint) const USTRING_NOEXCEPT { return( mChar != codePoint ); }
+            inline const bool operator==(UChar codePoint) const { return( mChar == codePoint ); }
+            inline const bool operator==(int codePoint) const { return( mChar == codePoint ); }
+            inline const bool operator!=(UChar codePoint) const { return( mChar != codePoint ); }
 
             // Case Conversion
-            static UChar toUpper(ValueType codePoint) USTRING_NOEXCEPT;
-            static UChar toLower(ValueType codePoint) USTRING_NOEXCEPT;
-            static UChar toTitleCase(ValueType codePoint) USTRING_NOEXCEPT;
-            inline UChar toUpper() const USTRING_NOEXCEPT { return toUpper(mChar); } 
-            inline UChar toLower() const USTRING_NOEXCEPT { return toLower(mChar); }
-            inline UChar toTitleCase() const USTRING_NOEXCEPT { return toTitleCase(mChar); }
+            static UChar toUpper(ValueType codePoint);
+            static UChar toLower(ValueType codePoint);
+            static UChar toTitleCase(ValueType codePoint);
+            inline UChar toUpper() const { return toUpper(mChar); } 
+            inline UChar toLower() const { return toLower(mChar); }
+            inline UChar toTitleCase() const { return toTitleCase(mChar); }
             
             // Is?? functions
-            static bool isNull(ValueType codePoint) USTRING_NOEXCEPT;
-            static bool isSpace(ValueType codePoint) USTRING_NOEXCEPT;        
-            static bool isLetter(ValueType codePoint) USTRING_NOEXCEPT;
-            static bool isControl(ValueType codePoint) USTRING_NOEXCEPT;
-            static bool isSurrogate(ValueType codePoint) USTRING_NOEXCEPT;
-            static bool isPunctuation(ValueType codePoint) USTRING_NOEXCEPT;
-            static bool isSymbol(ValueType codePoint) USTRING_NOEXCEPT;
-            static bool isLineBreak(ValueType codePoint) USTRING_NOEXCEPT;
-            static bool isNumber(ValueType codePoint) USTRING_NOEXCEPT;
-            static bool isUpper(ValueType codePoint) USTRING_NOEXCEPT;
-            static bool isLower(ValueType codePoint) USTRING_NOEXCEPT;
-            static bool isTitleCase(ValueType codePoint) USTRING_NOEXCEPT;
+            static bool isNull(ValueType codePoint);
+            static bool isSpace(ValueType codePoint);        
+            static bool isLetter(ValueType codePoint);
+            static bool isControl(ValueType codePoint);
+            static bool isSurrogate(ValueType codePoint);
+            static bool isPunctuation(ValueType codePoint);
+            static bool isSymbol(ValueType codePoint);
+            static bool isLineBreak(ValueType codePoint);
+            static bool isNumber(ValueType codePoint);
+            static bool isUpper(ValueType codePoint);
+            static bool isLower(ValueType codePoint);
+            static bool isTitleCase(ValueType codePoint);
             
-            inline bool isUpper() USTRING_NOEXCEPT { return isUpper(mChar); }
-            inline bool isLower() USTRING_NOEXCEPT { return isLower(mChar); }
-            inline bool isTitleCase() USTRING_NOEXCEPT { return isTitleCase(mChar); }
-            inline bool isSpace() const USTRING_NOEXCEPT { return isSpace(mChar); }
-            inline bool isLetter() const USTRING_NOEXCEPT { return isLetter(mChar); }
-            inline bool isControl() const USTRING_NOEXCEPT { return isControl(mChar); }
-            inline bool isSurrogate() const USTRING_NOEXCEPT { return isSurrogate(mChar); } 
-            inline bool isPunctuation() const USTRING_NOEXCEPT { return isPunctuation(mChar); }
-            inline bool isSymbol() const USTRING_NOEXCEPT { return isSymbol(mChar); }
-            inline bool isLineBreak() const USTRING_NOEXCEPT { return isLineBreak(mChar); }
-            inline bool isNumber() const USTRING_NOEXCEPT { return isNumber(mChar); }
-            inline bool isNull() const USTRING_NOEXCEPT { return isNull(mChar); }
+            inline bool isUpper() { return isUpper(mChar); }
+            inline bool isLower() { return isLower(mChar); }
+            inline bool isTitleCase() { return isTitleCase(mChar); }
+            inline bool isSpace() const { return isSpace(mChar); }
+            inline bool isLetter() const { return isLetter(mChar); }
+            inline bool isControl() const { return isControl(mChar); }
+            inline bool isSurrogate() const { return isSurrogate(mChar); } 
+            inline bool isPunctuation() const { return isPunctuation(mChar); }
+            inline bool isSymbol() const { return isSymbol(mChar); }
+            inline bool isLineBreak() const { return isLineBreak(mChar); }
+            inline bool isNumber() const { return isNumber(mChar); }
+            inline bool isNull() const { return isNull(mChar); }
             
             // Type casting operators
-            inline operator ValueType() USTRING_NOEXCEPT { return mChar; }
+            inline operator ValueType() { return mChar; }
         private:
             static inline bool isCodePointInArray(UCharEntry *array, std::size_t arraySize, UChar::ValueType codePoint)
             {
