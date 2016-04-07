@@ -12,6 +12,7 @@ UString is a open-source C++11 UTF-8 String library, that is free for personal a
  * Encoding conversion between UTF-8/16/32
  * STL compatible iterators
  * Character-based access
+ * Documentation (very basic)
  * Unit tests
  
 ## Building ##
@@ -27,7 +28,7 @@ You can use ccmake to see the variables you can set. Such as building dynamic or
 UString is still in VERY early stages, so the API is still subject to much change. I welcome any contributions such as code, bug fixes, etc.
 
 ## TODO ##
-- [ ] Documentation
+- [x] Documentation
 - [x] Replace methods
 - [ ] Erase methods (erase (by iter, index, etc), clear, ...)
 - [ ] Compare methods & operators (<, >, ...)
