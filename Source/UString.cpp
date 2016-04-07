@@ -363,3 +363,14 @@ UString UString::replaceAll(const UString& what, const UString& with, std::size_
 
     return retStr;
 }
+
+UString UString::replaceFirst(const UString& what, const UString& with, std::size_t start) const
+{
+    UString retStr = *this;
+
+    std::size_t pos = retStr.find(what, start);
+    if( pos != npos )
+        retStr = retStr.replace(pos, what.length(), with);
+
+    return retStr;
+}

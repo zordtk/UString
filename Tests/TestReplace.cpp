@@ -29,4 +29,6 @@ TEST_CASE("Replacement Tests", "[UString]")
     REQUIRE( UString(u8"ήίΰ ήίΰ ήίΰ").replaceAll(u8"ήίΰ", u8"foo") == "foo foo foo" );
     REQUIRE( UString(u8"blahήίΰblah").replace(4, 3, "blah") == "blahblahblah" );
     REQUIRE( UString(u8"ήίΰ ήίΰ ήίΰ").replaceAll(u8"ήίΰ", u8"foo", 4) == "ήίΰ foo foo" );
+    REQUIRE( UString(u8"ήίΰ ήίΰ ήίΰ").replaceFirst(u8"ήίΰ", u8"foo") == u8"foo ήίΰ ήίΰ" );
+    REQUIRE( UString(u8"ήίΰ ήίΰ ήίΰ").replaceFirst(u8"ήίΰ", u8"foo", 4) == u8"ήίΰ foo ήίΰ" );
 }
