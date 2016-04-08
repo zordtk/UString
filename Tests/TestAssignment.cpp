@@ -32,3 +32,10 @@ TEST_CASE("Assignment", "[UString]")
     REQUIRE( UString("est").prepend('t') == "test" );
     REQUIRE( UString("foo").prepend(u8"έέ").append("bar") == u8"έέfoobar" );
 }
+
+TEST_CASE("Inserts", "[UString]")
+{
+    REQUIRE( UString("thistest").insert(" is a ", 4) == "this is a test" );
+    REQUIRE( UString("foo").insert("bar", 12) == "foobar" );
+    REQUIRE( UString(u8"άέή").insert(u8"ί ΰ α", 0) == u8"ί ΰ αάέή" );
+}

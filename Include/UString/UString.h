@@ -190,8 +190,18 @@
              * @param ch UChar character to assign
              */
             explicit UString(UChar ch) USTRING_NOEXCEPT;
-
+            
             static const size_t npos = std::string::npos;
+
+            /*! Inserts other string into this one at the given position
+             *
+             * If the given position is greater than the length of this string it will be appended.
+             * @param other String to insert
+             * @param pos Position of the string to insert at
+             * @return Reference to this object
+             */
+            UString& insert(const UString& other, std::size_t pos);
+
 
             /*! Assigns other to this string
              * @param other String to assign

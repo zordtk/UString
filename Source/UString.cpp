@@ -40,6 +40,29 @@ UString::UString(const UString& str) USTRING_NOEXCEPT
     mData.assign(str.mData);
 }
 
+UString& UString::insert(const UString& what, std::size_t where)
+{
+    if( where == 0 )
+    {
+        prepend(what);
+        return *this;
+    } 
+    else if( where > length()-1 )
+    {
+        append(what);
+        return *this;
+    }
+
+    UString retStr;
+
+    std::copy(begin(), std::next(begin(), where), std::back_inserter(retStr));
+    retStr.append(what);
+    std::copy(std::next(begin(), where), end(), std::back_inserter(retStr));
+
+    assign(retStr);
+    return *this;
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////
 /// Assignment                                                                        ///
 /////////////////////////////////////////////////////////////////////////////////////////
