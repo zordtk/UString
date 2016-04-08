@@ -32,6 +32,7 @@ UString is still in VERY early stages, so the API is still subject to much chang
 
 ## TODO ##
 - [ ] Compare methods & operators (<, >, ...)
+- [ ] Need to catch every UTF8-CPP exception that can be thrown and either wrap it into a custom or translate to existing exceptions in the STL
 - [ ] UTF-8 validation 
 - [ ] Compose and formatting functions
 
