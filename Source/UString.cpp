@@ -40,6 +40,11 @@ UString::UString(const UString& str) USTRING_NOEXCEPT
     mData.assign(str.mData);
 }
 
+UString::UString(const std::string& str) USTRING_NOEXCEPT
+{
+    mData.assign(str);
+}
+
 UString& UString::insert(const UString& what, std::size_t where)
 {
     if( where == 0 )
