@@ -189,7 +189,7 @@
             /*! Construct a UString from a std::string
              * @param str std::string to copy.
              */
-            explicit UString(const std::string& str) USTRING_NOEXCEPT;
+            UString(const std::string& str) USTRING_NOEXCEPT;
 
             /*! Construct a UString as a copy of a C string.
              * @param ch UChar character to assign
