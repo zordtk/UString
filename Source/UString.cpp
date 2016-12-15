@@ -470,3 +470,10 @@ UString& UString::erase(std::size_t start, std::size_t num)
     assign(retStr);
     return *this;
 }
+
+std::ostream& operator<<(std::ostream& os, const UString& str)
+{
+    os << str.toStdString();
+    return os;
+}
+

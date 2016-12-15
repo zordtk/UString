@@ -506,4 +506,6 @@
             std::string mData;
     };
 
+	std::ostream& operator<<(std::ostream& os, const UString& str);
+
 #endif
