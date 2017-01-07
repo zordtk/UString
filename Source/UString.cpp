@@ -32,7 +32,8 @@ UString::UString(UChar ch) USTRING_NOEXCEPT
 
 UString::UString(const char *str) USTRING_NOEXCEPT
 {
-    mData.assign(str);
+    if( str != nullptr )
+        mData.assign(str);
 }
 
 UString::UString(const UString& str) USTRING_NOEXCEPT
@@ -79,7 +80,8 @@ UString& UString::assign(const UString& str)
 
 UString& UString::assign(const char* str)
 {
-    mData.assign(str);
+    if( str != nullptr )
+        mData.assign(str);
     return *this;
 }
 
@@ -104,7 +106,8 @@ UString& UString::append(UChar ch)
 
 UString& UString::append(const char* str)
 {
-    mData.append(str);
+    if( str != nullptr )
+        mData.append(str);
     return *this;
 }
 
