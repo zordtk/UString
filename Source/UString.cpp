@@ -52,7 +52,7 @@ UString& UString::insert(const UString& what, std::size_t where)
     {
         prepend(what);
         return *this;
-    } 
+    }
     else if( where > length()-1 )
     {
         append(what);
@@ -177,7 +177,7 @@ bool UString::operator==(const UString& str) const
 
 bool UString::operator==(const char* str) const
 {
-    return( mData == str );
+    return( str && mData == str );
 }
 
 bool UString::operator!=(const UString& str) const
@@ -187,7 +187,7 @@ bool UString::operator!=(const UString& str) const
 
 bool UString::operator!=(const char* str) const
 {
-    return( mData != str );
+    return( str && mData != str );
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -420,7 +420,7 @@ UString& UString::replaceLast(const UString& what, const UString& with, std::siz
     UString retStr = *this;
     if( end != npos )
         end = length() - end;
-        
+
     std::size_t pos = retStr.findLastOf(what, end);
 
     if( pos != npos )
@@ -439,7 +439,7 @@ UString& UString::clear()
 UString& UString::erase(const UString::Iterator& start, const UString::Iterator& stop)
 {
     UString retStr;
-        
+
     std::copy(begin(), start, std::back_inserter(retStr));
     std::copy(stop, end(), std::back_inserter(retStr));
 
@@ -479,4 +479,3 @@ std::ostream& operator<<(std::ostream& os, const UString& str)
     os << str.toStdString();
     return os;
 }
-
