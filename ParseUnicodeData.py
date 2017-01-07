@@ -1,6 +1,6 @@
 #!/usr/bin/python 
 #   UString - UTF-8 C++ Library
-#     Copyright (c) 2016 Jeremy Harmon <jeremy.harmon@zoho.com>
+#     Copyright (c) 2016, 2017 Jeremy Harmon <jeremy.harmon@zoho.com>
 #     http://github.com/zordtk/ustring
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -59,7 +59,7 @@ others              = []
 
 SourceHeader        = """\
 //   UString - UTF-8 C++ Library
-//     Copyright (c) 2016 Jeremy Harmon <jeremy.harmon@zoho.com>
+//     Copyright (c) 2016, 2017 Jeremy Harmon <jeremy.harmon@zoho.com>
 //     http://github.com/zordtk/ustring
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
