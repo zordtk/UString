@@ -28,7 +28,7 @@
      * UString is a open-source UTF-8 encoded C++-11 string library. It's free for personal and commercial usage and licensed
      * under the MIT License. Development is done on GitHub and can be found at http://github.com/zordtk/ustring
      *
-     * Copyright 2016 (c) Jeremy Harmon
+     * Copyright 2016, 2017 (c) Jeremy Harmon
      *
      * Permission is hereby granted, free of charge, to any person obtaining a copy
      * of this software and associated documentation files (the "Software"), to deal
