@@ -226,19 +226,19 @@ UString& UString::toTitleCase()
 /////////////////////////////////////////////////////////////////////////////////////////
 /// Type-Casting                                                                      ///
 /////////////////////////////////////////////////////////////////////////////////////////
-std::string UString::toStdString() const
+const std::string& UString::toStdString() const
 {
     return mData;
 }
 
-std::u16string UString::toStdU16String() const
+const std::u16string UString::toStdU16String() const
 {
     std::u16string u16str;
     utf8::utf8to16(mData.begin(), mData.end(), std::back_inserter(u16str));
     return u16str;
 }
 
-std::u32string UString::toStdU32String() const
+const std::u32string UString::toStdU32String() const
 {
     std::u32string u32str;
     utf8::utf8to32(mData.begin(), mData.end(), std::back_inserter(u32str));

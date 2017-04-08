@@ -318,17 +318,17 @@
             /*! Convert to std::string.
              * @return std::string
              */
-            std::string toStdString() const;
+            const std::string& toStdString() const;
 
             /*! Convert to UTF-16 and return it as a std::u16string
              * @return std::u16string
              */
-            std::u16string toStdU16String() const;
+            const std::u16string toStdU16String() const;
 
             /*! Convert to UTF-32 std::u32string.
              * @return std::u32string
              */
-            std::u32string toStdU32String() const;
+            const std::u32string toStdU32String() const;
 
             /*! Convert a string from UTF-16 and return a new UTF-8 encoded string
              * @param str UTF-16 encoded string to convert
