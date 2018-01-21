@@ -190,6 +190,11 @@ bool UString::operator!=(const char* str) const
     return( str && mData != str );
 }
 
+int UString::compare(const UString& other) const
+{
+    return mData.compare(other.mData);
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////
 /// Case Conversion                                                                   ///
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -478,4 +483,9 @@ std::ostream& operator<<(std::ostream& os, const UString& str)
 {
     os << str.toStdString();
     return os;
+}
+
+bool operator<(const UString &str1, const UString &str2)
+{
+    return( str1.compare(str2) );
 }

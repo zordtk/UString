@@ -32,6 +32,9 @@ TEST_CASE("Comparison", "[UString]")
     REQUIRE( UString(u8"ήήήήήήήή").length() == 8 );
     REQUIRE( UString(u8"ήήήήήήήή").size() == 16 );
     REQUIRE( UString(std::string("testing")) == "testing" );
+    REQUIRE( UString(u8"ά έ ή ί ΰ α").compare(UString(u8"ά έ ή ί ΰ α")) == 0 );
+    REQUIRE( UString(u8"ά έ ή ί ΰ α").compare(UString(u8"ά έ ή ί ΰ")) > 0 );
+    REQUIRE( UString(u8"ά").compare(UString(u8"ά έ ή ί ΰ α")) < 0 );
     
     UString tmp(u8"άέήίΰαa0djk");
     REQUIRE( tmp.at(1) == 0x03AD );

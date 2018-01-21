@@ -229,6 +229,8 @@
              */
             UString& operator=(const char* other);
 
+            int compare(const UString& other) const;
+
             /*! Append a character to the current string
              * @param ch Character to append
              * @return Reference to this object
@@ -507,5 +509,6 @@
     };
 
 	std::ostream& operator<<(std::ostream& os, const UString& str);
+    bool operator<(const UString& str1, const UString &str2);
 
 #endif
