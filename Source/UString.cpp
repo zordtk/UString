@@ -487,5 +487,5 @@ std::ostream& operator<<(std::ostream& os, const UString& str)
 
 bool operator<(const UString &str1, const UString &str2)
 {
-    return( str1.compare(str2) );
+    return( str1.toStdString() < str2.toStdString() );
 }
